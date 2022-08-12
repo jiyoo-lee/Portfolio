@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 등록 페이지</title>
+    <script src="./js/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/basic.css">
+    <link rel="stylesheet" type="text/css" href="./css/login.css?v=1">
+    <link rel="icon" href="./img/logo.png" sizes="128x128">
+    <link rel="icon" href="./img/logo.png" sizes="64x64">
+    <link rel="icon" href="./img/logo.png" sizes="32x32">
+    <link rel="icon" href="./img/logo.png" sizes="16x16">
+</head>
+<script>
+	$(function() {
+		$("#cancelButton").click(function() {
+			var $email = $("#adminEmail").val();
+			if(confirm("정말 계정등록을 취소하시겠습니까?")){
+				alert("계정 등록이 취소되었습니다.")
+				history.go(-1);	
+			}
+		})
+		
+		$("#overlap").click(function() {
+				var $checkOverlap = $("#adminId").val();   
+			if($checkOverlap == ""){
+				alert("아이디를 입력해주세요");
+			}else{
+				location.href = "./Registeration.do?overlap=" + $checkOverlap;				
+			}
+		})
+		
+		$("#registerButton").click(function() {
+			var $id = $("#adminId").val();
+			var $password = $("#adminPassword").val();
+			var $password2 = $("#adminPassword2").val();
+			var $name = $("#adminName").val();
+			var $email = $("#adminEmail").val();
+			var $department = $("#department").val();
+			var $position = $("#positon").val();
+			var $regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+			if($id==""){
+				alert("사용하실 아이디를 입력해주세요")
+			}
+			else if($password == ""){
+				alert("사용하실 비밀번호를 입력해주세요")
+			}
+			else if($name == ""){
+				alert("성명을 입력해주세요")
+			}
+			else if($email == ""){
+				alert("사용하실 이메일을 입력해주세요");
+			}
+			else if($regEmail.test($email) == false){
+				alert("올바른 이메일 형식이 아닙니다.");
+			}
+			else if($("#admintel1").val() == "" || $("#admintel2").val() == "" || $("#admintel3").val() == ""){
+					alert("연락처를 모두 입력해주세요")
+			}
+			else if($("#department option:selected").val() == ""){
+				alert("부서를 선택해주세요")
+			}
+			else if($("#position option:selected").val() == ""){
+				alert("직급을 선택해주세요");
+			}
+			else{
+				if($password.length < 4 || $password.length > 16){
+					alert("패스워드는 4~16자리만 입력 가능합니다")
+				}
+				else if($password != $password2){
+					alert("패스워드가 일치하지않습니다.");
+				}
+				else if($("#admintel3").val().length <4){
+					alert("연락처를 다시 확인해주세요");
+				}
+				else{
+					frm.method ="post";
+					frm.enctype = "application/x-www-form-urlencoded"
+					frm.action = "./Registeration.do";
+					frm.submit();					
+				}	
+			}
+		})
+	});
+</script>
+<body>
+<form name="frm" id="frm">
+    <header class="admin_title_add">
+        <p><a href= "./index.html"><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR ADD</a></p>
+    </header>
+
+    <section class="admin_bgcolor_add">
+        <div class="admin_login_add">
+            <ul>
+                <li class="font_color1">아이디 및 패스워드 정보</li>
+                <li>
+                <input type="text" class="add_input1" id="adminId" name="adminId" placeholder="생성할 관리자 아이디를 입력하세요">
+                <button type="button"  class="btn_button" id="overlap">중복체크</button>
+                </li>
+                <li>
+                    <input type="password" class="add_input1" id="adminPassword" name="adminPassword" placeholder="접속할 패스워드를 입력하세요">
+                    <input type="password" class="add_input1" id="adminPassword2"placeholder="동일한 패스워드를 입력하세요">
+                </li>
+                <li class="font_color1">관리자 기본정보 입력</li>
+                <li>
+                    <input type="text" class="add_input1" id="adminName" name="adminName" placeholder="담당자 이름을 입력하세요">
+                </li>
+                <li>
+                <input type="text" class="add_input1 emails" id="adminEmail" name="adminEmail" placeholder="담당자 이메일을 입력하세요">
+                </li>
+                <li class="font_color1">
+                <input type="text" class="add_input1 hp1" id="admintel1" name="admintel1"placeholder="HP" 
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" value="010" maxlength="3">
+                -
+                <input type="text" class="add_input1 hp2" id="admintel2"  name="admintel2"placeholder="1234" 
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" maxlength="4">
+                -
+                <input type="text" class="add_input1 hp2" id="admintel3" name="admintel3"placeholder="5678" 
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" maxlength="4">
+                </li>
+                <li class="font_color1">관리자 담당부서 및 직책</li>
+                <li>
+                    <select class="add_select1" id="department" name="department">
+                        <option value="">담당자 부서를 선택하세요</option>
+                        <option value="a">임원</option>
+                        <option value="b">전산팀</option>
+                        <option value="c">디자인팀</option>
+                        <option value="d">CS팀</option>
+                        <option value="e">MD팀</option>
+                    </select>
+                    <select class="add_select1" id="position" name="position">
+                        <option value="">담당자 직책을 선택하세요</option>
+                        <option value="1">대표</option>
+                        <option value="2">부장</option>
+                        <option value="3">팀장</option>
+                        <option value="4">과장</option>
+                        <option value="5">대리</option>
+                        <option value="6">사원</option>
+                    </select>
+                </li>
+                <li class="font_color1">※ 가입완료 후 전산 담당자가 확인 후 로그인 할 수 있습니다.</li>
+            </ul>
+            <span class="admin_addbtn">
+                <button type="button" class="btn_button btncolor1" id="registerButton" name="registerButton" title="관리자 등록">관리자 등록</button>
+                <button type="button" class="btn_button btncolor2" id="cancelButton" name="cancelButton" "title="관리자 취소">등록 취소</button>
+            </span>
+        </div>
+    </section>
+    <footer class="admin_copy">
+        <div>
+            Copyright ⓒ 2022 webshopping All rights reserved.
+        </div>
+    </footer>
+   </form> 
+</body>
+</html>
