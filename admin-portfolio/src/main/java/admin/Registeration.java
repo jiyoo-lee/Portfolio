@@ -37,7 +37,7 @@ public class Registeration extends HttpServlet {
 			}
 			
 		}catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
 		}
 	}
 
