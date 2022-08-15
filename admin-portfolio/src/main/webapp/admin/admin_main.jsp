@@ -24,7 +24,7 @@
 <header class="headercss"><%@include file="./admin_header.html" %></header>
 <nav class="navcss"><%@include file="./admin_menu.html" %></nav>
 <main class="maincss">
-<section><%@include file="./admin_list.html"%></section>
+<section><%@include file="./admin_list.jsp"%></section>
 <section></section>
 <section></section>
 </main>
