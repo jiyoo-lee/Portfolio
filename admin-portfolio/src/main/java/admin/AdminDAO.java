@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import admin.exception.NoPermisionAdminException;
 import admin.exception.UserNotFoundException;
 
 public class AdminDAO {
@@ -33,7 +34,7 @@ public class AdminDAO {
 		GetDatetiemUtil datetime = new GetDatetiemUtil();
 		String today = datetime.getNowDatetime();
 		
-		String SQL = "insert into admin_list values('0',?,?,?,?,?,?,?,'"+today+"','N')";
+		String SQL = "insert into admin_list values('0',?,?,?,?,?,?,?,'"+today+"','W')";
 		this.ps = connection.prepareStatement(SQL);
 		this.ps.setString(1, adminList.get(0));
 		this.ps.setString(2, adminList.get(1));
@@ -85,18 +86,25 @@ public class AdminDAO {
 	
 	public String selectNameByIdAndPW(String id, String pw) throws SQLException {
 		
-		String SQL = "select name from admin_list where admin_id = ? and password = ?";
+		String SQL = "select name,access from admin_list where admin_id = ? and password = ?";
 		this.ps = connection.prepareStatement(SQL);
-		this.ps.setString(1,  id);
+		this.ps.setString(1, id);
 		this.ps.setString(2, pw);
 		ResultSet rs = ps.executeQuery();
-		if (rs.next()) {
-			return rs.getString("name");			
+		
+		if(rs.next()) {
+			if(rs.getString("access").intern() != "Y") {
+				throw new NoPermisionAdminException();
+			}
+			else {
+				return rs.getString("name");
+			}
 		}
 		else {
 			throw new UserNotFoundException();
-		}
+		}			
 	}
+	
 	public int loginHistory(String id) throws SQLException{
 		
 		GetDatetiemUtil datetime = new GetDatetiemUtil();

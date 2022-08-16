@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 
+import admin.exception.NoPermisionAdminException;
 import admin.exception.UserNotFoundException;
 
 
@@ -59,9 +60,13 @@ public class Login extends HttpServlet {
 			} else {
 				pr.print("<script>alert('이미 로그인하셨습니다.'); location.href='./admin_main.jsp';</script>");
 			}
-		} catch(UserNotFoundException e) {
+		}catch (NoPermisionAdminException e) {
+			pr.print("<script>alert('권한 승인 후 로그인이 가능합니다. 관리자에게 문의바랍니다.'); history.go(-1);</script>");
+		}
+		catch(UserNotFoundException e) {
 			pr.print("<script>alert('아이디 혹은 패스워드를 다시 확인해주세요'); history.go(-1);</script>");
 		} catch(SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
 			pr.print("<script>alert('데이터 통신 오류.. 관리자에게 문의바랍니다.'); history.go(-1);</script>");
 		}
 	}

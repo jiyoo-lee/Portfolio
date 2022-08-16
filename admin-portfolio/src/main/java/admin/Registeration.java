@@ -44,24 +44,22 @@ public class Registeration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-		ArrayList<String> adminList = new ArrayList<>();
-		String telNumber = request.getParameter("admintel1") + request.getParameter("admintel2") + request.getParameter("admintel3");
-		
-		adminList.add(request.getParameter("adminId"));
-		adminList.add(request.getParameter("adminPassword"));
-		adminList.add(request.getParameter("adminName"));
-		adminList.add(request.getParameter("adminEmail"));
-		adminList.add(telNumber);
-		adminList.add(request.getParameter("department"));
-		adminList.add(request.getParameter("position"));
-		
 		PrintWriter pr = response.getWriter();
-		
 		if(this.isoverlap == true) {
 			pr.print("<script>alert('아이디 중복 확인이 필요합니다.'); history.go(-1);</script>");
 		}
 		else {
+			ArrayList<String> adminList = new ArrayList<>();
+			String telNumber = request.getParameter("admintel1") + request.getParameter("admintel2") + request.getParameter("admintel3");
+			
+			adminList.add(request.getParameter("adminId"));
+			adminList.add(request.getParameter("adminPassword"));
+			adminList.add(request.getParameter("adminName"));
+			adminList.add(request.getParameter("adminEmail"));
+			adminList.add(telNumber);
+			adminList.add(request.getParameter("department"));
+			adminList.add(request.getParameter("position"));
+			
 			try {
 				AdminDAO rd = new AdminDAO();
 				int insert = rd.insert(adminList);
@@ -72,7 +70,6 @@ public class Registeration extends HttpServlet {
 				else {
 					throw new Exception("error-!");
 				}
-				
 			}catch (Exception e) {
 				pr.print("<script>alert('데이터 통신오류로 등록이 취소되었습니다. 담당자에게 문의바랍니다.')</script>");
 			}
