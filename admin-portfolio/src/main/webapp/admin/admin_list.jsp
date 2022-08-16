@@ -2,13 +2,20 @@
 <%@page import="admin.AdminDAO" %>
 <%@page import="admin.ApprovalJoinDTO" %>
 <%@page import="java.util.List" %>
-
+<% if(session.getAttribute("name") == null){%>	
+	<script>
+	alert("잘못된 접근입니다.");
+	 location.href="./index.html";
+	</script>	
+<% 
+	}
+%>
   <%
   	request.setCharacterEncoding("utf-8");
   	
   	AdminDAO adminDAO = new AdminDAO();
   	List<ApprovalJoinDTO> members = adminDAO.selectWaitingMembers();
-  %> 
+ %> 
 <meta charset="UTF-8">
 
 <p>신규등록 관리자</p>
