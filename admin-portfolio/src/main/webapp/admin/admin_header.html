@@ -5,11 +5,11 @@
   %> 
 <meta charset="UTF-8">
 <script>
-function logout() {
-	location.href="logout.jsp";
-}
+	function logout() {
+		location.href="logout.jsp";
+	}
 </script>
 <div class="header_div">
-    <p><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR</p>
-    <p><%=session.getAttribute("name")%> (관리자) <a href="#">[개인정보 수정]</a> <a onclick="logout()">[로그아웃]</a></p>
+    <p><a href= "./index.html" style = "color:white;"><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR</a></p>
+    <p><%=session.getAttribute("name")%> (관리자) <a href="#" style="color:white">[개인정보 수정]</a> <a style="color:white" onclick="logout()">[로그아웃]</a></p>
 </div>
