@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
+<%
+ session.invalidate();
+%>
+<script>
+	alert("로그아웃 되셨습니다.");
+	location.href = "./index.html";
+</script>
 </body>
 </html>

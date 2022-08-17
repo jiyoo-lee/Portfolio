@@ -15,10 +15,11 @@
 </head>
 <script>
 	$(function() {
+		
 		$("#cancelButton").click(function() {
 			var $email = $("#adminEmail").val();
 			if(confirm("정말 계정등록을 취소하시겠습니까?")){
-				alert("계정 등록이 취소되었습니다.");
+				alert("계정 등록이 취소되었습니다.")
 				history.go(-1);	
 			}
 		})
@@ -26,13 +27,13 @@
 		$("#overlap").click(function() {
 				var $checkOverlap = $("#adminId").val();   
 				var $regxId = /^[a-zA-Z][0-9a-zA-Z]{4,15}$/;
-				
 			if($checkOverlap == ""){
 				alert("아이디를 입력해주세요");
 			}else if($regxId.test($checkOverlap) == false){
-				alert("아이디는 소문자, 대문자 및 숫자를 사용하여 5~16자리까지 가능합니다.");
-			}else{
-				location.href = "./Registeration.do?overlap=" + $checkOverlap;	
+				alert("아이디는 소문자로 시작하여, 대소문자 및 숫자를 포함한 16자리까지 가능합니다.")
+			}
+			else{
+				location.href = "./Registeration.do?overlap=" + $checkOverlap;				
 			}
 		})
 		
@@ -44,17 +45,16 @@
 			var $email = $("#adminEmail").val();
 			var $department = $("#department").val();
 			var $position = $("#positon").val();
-			
 			var $regxEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-			
-			if($id==""){
-				alert("사용하실 아이디를 입력해주세요");
+			var $regxId = /^[a-zA-Z][0-9a-zA-Z]{4,15}$/;
+			if($id=="" || $regxId.test($id) == false){
+				alert("사용하실 아이디를 입력해주세요 (아이디는 소문자, 대문자 및 숫자를 포함한 16자리까지 가능합니다.)")
 			}
 			else if($password == ""){
-				alert("사용하실 비밀번호를 입력해주세요");
+				alert("사용하실 비밀번호를 입력해주세요")
 			}
 			else if($name == ""){
-				alert("성명을 입력해주세요");
+				alert("성명을 입력해주세요")
 			}
 			else if($email == ""){
 				alert("사용하실 이메일을 입력해주세요");
@@ -63,10 +63,10 @@
 				alert("올바른 이메일 형식이 아닙니다.");
 			}
 			else if($("#admintel1").val() == "" || $("#admintel2").val() == "" || $("#admintel3").val() == ""){
-					alert("연락처를 모두 입력해주세요");
+					alert("연락처를 모두 입력해주세요")
 			}
 			else if($("#department option:selected").val() == ""){
-				alert("부서를 선택해주세요");
+				alert("부서를 선택해주세요")
 			}
 			else if($("#position option:selected").val() == ""){
 				alert("직급을 선택해주세요");
@@ -74,12 +74,12 @@
 			else{
 				var $regxPassword = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 				if($password.length < 4 || $password.length > 16 || $regxPassword.test($password) == false){
-					alert("패스워드는 영문 대,소문자 및 숫자 특수문자를 조합한 8~16자리만 입력 가능합니다");
+					alert("패스워드는 영문 대,소문자 및 숫자 특수문자를 조합한 8~16자리만 입력 가능합니다.")
 				}
 				else if($password != $password2){
 					alert("패스워드가 일치하지않습니다.");
 				}
-				else if($("#admintel2").val().length < 3 ||$("#admintel3").val().length <4){
+				else if($("#admintel2").val().length < 4 || $("#admintel3").val().length < 4){
 					alert("연락처를 다시 확인해주세요");
 				}
 				else{
@@ -151,7 +151,7 @@
             </ul>
             <span class="admin_addbtn">
                 <button type="button" class="btn_button btncolor1" id="registerButton" name="registerButton" title="관리자 등록">관리자 등록</button>
-                <button type="button" class="btn_button btncolor2" id="cancelButton" name="cancelButton" "title="관리자 취소">등록 취소</button>
+                <button type="button" class="btn_button btncolor2" id="cancelButton" name="cancelButton" title="관리자 취소">등록 취소</button>
             </span>
         </div>
     </section>

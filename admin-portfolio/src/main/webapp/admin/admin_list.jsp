@@ -4,8 +4,8 @@
 <%@page import="java.util.List" %>
 <% if(session.getAttribute("name") == null){%>	
 	<script>
-	alert("잘못된 접근입니다.");
-	 location.href="./index.html";
+	alert("로그인이 필요합니다.");
+	 location.href="./index.jsp";
 	</script>	
 <% 
 	}
@@ -15,7 +15,7 @@
   	
   	AdminDAO adminDAO = new AdminDAO();
   	List<ApprovalJoinDTO> members = adminDAO.selectWaitingMembers();
- %> 
+  %> 
 <meta charset="UTF-8">
 
 <p>신규등록 관리자</p>
@@ -42,8 +42,59 @@
     <li><%=member.getAdminId()%></li>
     <li><%=member.getPhoneNumber()%></li>
     <li><%=member.getEmail()%></li>
-    <li><%=member.getDepartment()%></li>
-    <li><%=member.getPosition()%></li>
+    <% String depart = member.getDepartment();
+    	String department = ""; 
+    	switch(depart){
+    	case "a" :
+    		department = "임원";	
+    		break;
+    		
+    	case "b" :
+    		department = "전산팀";
+    		break;
+    		
+    	case "c" :
+    		department = "디자인팀";	
+    		break;
+    		
+    	case "d" :
+    		department = "CS팀";	
+    		break;
+    		
+    	case "e" :
+    		department = "MD팀";	
+    		break;
+    	} %> 
+    <li><%=department%></li>
+    	  <% String employee = member.getPosition();
+    	String position = ""; 
+    	switch(employee){
+    	case "1" :
+    		position = "대표";	
+    		break;
+    		
+    	case "2" :
+    		position = "부장";
+    		break;
+    		
+    	case "3" :
+    		position = "팀장";	
+    		break;
+    		
+    	case "4" :
+    		position = "과장";	
+    		break;
+    		
+    	case "5" :
+    		position = "대리";	
+    		break;
+    		
+    	case "6" :
+    		position = "사원";	
+    		break;
+    	} %> 
+    
+    <li><%=position%></li>
     <li><%=member.getCreateDate()%></li>
     <li>
         <input type="button" value="승인" class="new_addbtn1" title="승인">
