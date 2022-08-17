@@ -3,18 +3,12 @@ package admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.Session;
-
-import admin.exception.NoPermisionAdminException;
+import admin.exception.NoPermissionAdminException;
 import admin.exception.UserNotFoundException;
 
 
@@ -45,7 +39,7 @@ public class Login extends HttpServlet {
 			
 			// 20분짜리 세션생성
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(20*60);
+			session.setMaxInactiveInterval(1*10);
 			
 			if (session.isNew() || session.getAttribute("id") == null) {
 				session.setAttribute("id", id);
@@ -60,7 +54,7 @@ public class Login extends HttpServlet {
 			} else {
 				pr.print("<script>alert('이미 로그인하셨습니다.'); location.href='./admin_main.jsp';</script>");
 			}
-		}catch (NoPermisionAdminException e) {
+		}catch (NoPermissionAdminException e) {
 			pr.print("<script>alert('권한 승인 후 로그인이 가능합니다. 관리자에게 문의바랍니다.'); history.go(-1);</script>");
 		}
 		catch(UserNotFoundException e) {

@@ -5,12 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import admin.exception.NoPermisionAdminException;
+import admin.exception.NoPermissionAdminException;
 import admin.exception.UserNotFoundException;
 
 public class AdminDAO {
@@ -94,7 +91,7 @@ public class AdminDAO {
 		
 		if(rs.next()) {
 			if(rs.getString("access").intern() != "Y") {
-				throw new NoPermisionAdminException();
+				throw new NoPermissionAdminException();
 			}
 			else {
 				return rs.getString("name");
