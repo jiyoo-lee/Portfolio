@@ -4,7 +4,7 @@
 <%@page import="java.util.List" %>
 <% if(session.getAttribute("name") == null){%>	
 	<script>
-	alert("로그인이 필요합니다.");
+	alert("로그인이 필요합니다요.");
 	 location.href="./index.jsp";
 	</script>	
 <% 
