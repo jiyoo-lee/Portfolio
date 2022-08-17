@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ApprovalJoinDTO {
 	
-	private Integer id;
+	private Integer row;
 	
 	private String name;
 	
@@ -23,9 +23,10 @@ public class ApprovalJoinDTO {
 	public ApprovalJoinDTO() {
 	}
 
-	public ApprovalJoinDTO(Integer id, String name, String adminId, String phoneNumber, String email, String department,
-			String position, String createDate) {
-		this.id = id;
+	public ApprovalJoinDTO(Integer row, String name, String adminId, String phoneNumber, String email,
+			String department, String position, String createDate) {
+		super();
+		this.row = row;
 		this.name = name;
 		this.adminId = adminId;
 		this.phoneNumber = phoneNumber;
@@ -35,12 +36,12 @@ public class ApprovalJoinDTO {
 		this.createDate = createDate;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getRow() {
+		return row;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRow(Integer row) {
+		this.row = row;
 	}
 
 	public String getName() {
@@ -97,12 +98,5 @@ public class ApprovalJoinDTO {
 
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
-	}
-
-	@Override
-	public String toString() {
-		return "ApprovalJoinDTO [id=" + id + ", name=" + name + ", adminId=" + adminId + ", phoneNumber=" + phoneNumber
-				+ ", email=" + email + ", department=" + department + ", position=" + position + ", createDate="
-				+ createDate + "]";
 	}
 }

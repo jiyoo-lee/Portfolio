@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
   <%
   	request.setCharacterEncoding("utf-8");
-  	String abc = (String)request.getAttribute("id");
   %> 
 <!DOCTYPE html>
 <html lang="ko">

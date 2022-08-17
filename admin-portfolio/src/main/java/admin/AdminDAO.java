@@ -5,8 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import admin.exception.NoPermissionAdminException;
 import admin.exception.UserNotFoundException;
 
@@ -44,19 +47,23 @@ public class AdminDAO {
 		return ps.executeUpdate();
 	}
 	
-	public List<ApprovalJoinDTO> selectWaitingMembers() throws SQLException{
+	public List<ApprovalJoinDTO> selectWaitingMembers(int sequence, int pageSize) throws SQLException{
 		List<ApprovalJoinDTO> waitingMembers = new ArrayList<>();
+		int startRow = (sequence-1) * pageSize;
 		
-		String sql = "select id, name, admin_id, tel, email, department, position, indatetime "
-				   + "from admin_list "
-				   + "where access = 'W' "
-				   + "order by id desc";
+		String sql = "select @rownum := @rownum+1 as row, a.name, a.admin_id, a.tel, a.email, a.department, a.position, a.indatetime "
+				   + "from admin_list a, (select @rownum := 0) r "
+				   + "where a.access = 'W' "
+				   + "order by row desc "
+				   + "limit ?, ?";
 		this.ps = connection.prepareStatement(sql);
-		
+		this.ps.setInt(1, startRow);
+		this.ps.setInt(2, pageSize);
+
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			ApprovalJoinDTO member = new ApprovalJoinDTO();
-			member.setId(Integer.parseInt(rs.getString("id")));
+			member.setRow(Integer.parseInt(rs.getString("row")));
 			member.setName(rs.getString("name"));
 			member.setAdminId(rs.getString("admin_id"));
 			member.setPhoneNumber(rs.getString("tel"));
@@ -110,6 +117,22 @@ public class AdminDAO {
 		this.ps = connection.prepareStatement(SQL);
 		
 		return ps.executeUpdate();
+	}
+	
+	public int countWaitingMembers() throws SQLException{
+		String sql = "select count(*) as count "
+				   + "from admin_list "
+				   + "where access = 'W'";
+		this.ps = connection.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+			return rs.getInt("count");			
+		}
+		else {
+			throw new SQLException();
+		}
 	}
 
 }

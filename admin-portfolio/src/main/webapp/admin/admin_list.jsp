@@ -14,7 +14,15 @@
   	request.setCharacterEncoding("utf-8");
   	
   	AdminDAO adminDAO = new AdminDAO();
-  	List<ApprovalJoinDTO> members = adminDAO.selectWaitingMembers();
+  	int pageSize = 5;
+  	int rowCount = adminDAO.countWaitingMembers();
+  	int pageCount = (int) Math.ceil((double)rowCount / (double)pageSize);
+  	
+  	String pageNumber = request.getParameter("page");
+  	if (pageNumber == null) pageNumber = "1";
+  	
+  	int pageSequence = Integer.parseInt(pageNumber);
+  	List<ApprovalJoinDTO> members = adminDAO.selectWaitingMembers(pageSequence, pageSize);
   %> 
 <meta charset="UTF-8">
 
@@ -37,7 +45,7 @@
 <%} else {%>
  <%for(ApprovalJoinDTO member : members) { %>
 <ol class="new_admin_lists">
-    <li><%=member.getId()%></li>
+    <li><%=member.getRow()%></li>
     <li><%=member.getName()%></li>
     <li><%=member.getAdminId()%></li>
     <li><%=member.getPhoneNumber()%></li>
@@ -103,3 +111,7 @@
 </ol>
   <% } %>
 <% }%>
+
+<% for(int i = 1; i <= pageCount; i++) {%>
+	<ol style = "border:1px solid black; width: 20px; height: 30px;"><li><a href = "./admin_main.jsp?page=<%=i%>"><%=i %></a></li></ol>
+<%	}%>
