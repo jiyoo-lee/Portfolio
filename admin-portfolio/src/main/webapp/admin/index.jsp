@@ -1,13 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% if(session.getAttribute("name") != null){%>	
-<script>
-	alert("이미 로그인하셨습니다.");
-	 location.href="./admin_main.jsp";
-</script>	
-<% 
-	}
-%>
+<%@include file = "./loginSession.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,7 +31,7 @@
 			else{
 				frm.method ="POST";
 				frm.enctype = "application/x-www-form-urlencoded";
-				frm.action = "./Login.do";
+				frm.action = "./login.do";
 				frm.submit();
 			}
 		})

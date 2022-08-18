@@ -2,14 +2,6 @@
 <%@page import="admin.AdminDAO" %>
 <%@page import="admin.ApprovalJoinDTO" %>
 <%@page import="java.util.List" %>
-<% if(session.getAttribute("name") == null){%>	
-	<script>
-	alert("로그인이 필요합니다요.");
-	 location.href="./index.jsp";
-	</script>	
-<% 
-	}
-%>
   <%
   	request.setCharacterEncoding("utf-8");
   	

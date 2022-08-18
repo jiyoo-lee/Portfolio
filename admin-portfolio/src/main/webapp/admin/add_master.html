@@ -26,14 +26,31 @@
 		
 		$("#overlap").click(function() {
 				var $checkOverlap = $("#adminId").val();   
-				var $regxId = /^[a-zA-Z][0-9a-zA-Z]{4,15}$/;
+				var $regxId = /^[0-9a-zA-Z][0-9a-zA-Z]{4,15}$/;
 			if($checkOverlap == ""){
 				alert("아이디를 입력해주세요");
 			}else if($regxId.test($checkOverlap) == false){
-				alert("아이디는 소문자로 시작하여, 대소문자 및 숫자를 포함한 16자리까지 가능합니다.")
+				alert("아이디는 영문 대 소문자 및 숫자를 포함한 5~16자리까지 가능합니다.")
 			}
 			else{
-				location.href = "./Registeration.do?overlap=" + $checkOverlap;				
+				$.ajax({
+					url: "./registeration.do",
+					data: {overlap:$checkOverlap},
+					cache: false,
+					method: "GET",
+					dataType: "text",
+					success: function($data) {
+						if($data == "overlap"){
+							alert("중복된 아이디입니다.");
+						}
+						else{
+							alert("사용가능한 아이디입니다.");
+						}
+					},
+					error : function() {
+						alert("데이터 통신 오류 잠시후 다시 시도해주세요");
+					}
+				});							
 			}
 		})
 		
@@ -47,8 +64,9 @@
 			var $position = $("#positon").val();
 			var $regxEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 			var $regxId = /^[a-zA-Z][0-9a-zA-Z]{4,15}$/;
+			
 			if($id=="" || $regxId.test($id) == false){
-				alert("사용하실 아이디를 입력해주세요 (아이디는 소문자, 대문자 및 숫자를 포함한 16자리까지 가능합니다.)")
+				alert("사용하실 아이디를 입력해주세요 (아이디는 소문자, 대문자 및 숫자를 포함한 5~16자리까지 가능합니다.)")
 			}
 			else if($password == ""){
 				alert("사용하실 비밀번호를 입력해주세요")
@@ -74,7 +92,7 @@
 			else{
 				var $regxPassword = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,16}$/;
 				if($password.length < 4 || $password.length > 16 || $regxPassword.test($password) == false){
-					alert("패스워드는 영문 대,소문자 및 숫자 특수문자를 조합한 8~16자리만 입력 가능합니다.")
+					alert("패스워드는 영문 대,소문자 및 숫자 특수문자를 조합한 8~16자리를 입력해주세요.")
 				}
 				else if($password != $password2){
 					alert("패스워드가 일치하지않습니다.");
@@ -85,7 +103,7 @@
 				else{
 					frm.method ="post";
 					frm.enctype = "application/x-www-form-urlencoded"
-					frm.action = "./Registeration.do";
+					frm.action = "./registeration.do";
 					frm.submit();					
 				}	
 			}
@@ -95,7 +113,7 @@
 <body>
 <form name="frm" id="frm">
     <header class="admin_title_add">
-        <p><a href= "./index.html"><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR ADD</a></p>
+        <p><a href= "./index.jsp"><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR ADD</a></p>
     </header>
 
     <section class="admin_bgcolor_add">

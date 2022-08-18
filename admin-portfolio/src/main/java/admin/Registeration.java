@@ -30,10 +30,10 @@ public class Registeration extends HttpServlet {
 			PrintWriter pr = response.getWriter();
 			
 			if(this.isoverlap == true) {
-				pr.print("<script>alert('중복된 아이디입니다.'); history.go(-1);</script>");
+				pr.print("overlap");
 			}
 			else {
-				pr.print("<script>alert('사용가능한 아이디입니다.'); history.go(-1);</script>");
+				pr.print("available");
 			}
 			
 		}catch (Exception e) {

@@ -7,11 +7,12 @@
 </head>
 <body>
 <%
- session.invalidate();
+	session.removeAttribute("name");
+	session.invalidate();
 %>
 <script>
 	alert("로그아웃 되셨습니다.");
-	location.href = "./index.html";
+	location.href = "./index.jsp";
 </script>
 </body>
 </html>

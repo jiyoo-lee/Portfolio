@@ -41,27 +41,20 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(1*10);
 			
-			if (session.isNew() || session.getAttribute("id") == null) {
-				session.setAttribute("id", id);
-				session.setAttribute("name", name);
-				
-				if (session.isNew()) {
-					pr.print("<script>alert('세션생성 및 로그인 되셨습니다.'); location.href='./admin_main.jsp';</script>");
+			if (session.isNew() || session.getAttribute("name") == null) {
+					session.setAttribute("name", name);
 					int log = rd.loginHistory(id);
-				} else {
-					pr.print("<script>alert('로그인을 완료했습니다.'); location.href='./admin_main.jsp';</script>");
-				}
+					pr.print("<script>alert('로그인 되었습니다.'); location.href='./admin_main.jsp';</script>");
 			} else {
 				pr.print("<script>alert('이미 로그인하셨습니다.'); location.href='./admin_main.jsp';</script>");
 			}
 		}catch (NoPermissionAdminException e) {
-			pr.print("<script>alert('권한 승인 후 로그인이 가능합니다. 관리자에게 문의바랍니다.'); history.go(-1);</script>");
+			pr.print("<script>alert('권한 승인 후 로그인이 가능합니다. 서버 관리자에게 문의하세요.'); history.go(-1);</script>");
 		}
 		catch(UserNotFoundException e) {
 			pr.print("<script>alert('아이디 혹은 패스워드를 다시 확인해주세요'); history.go(-1);</script>");
 		} catch(SQLException | ClassNotFoundException e) {
-			e.printStackTrace();
-			pr.print("<script>alert('데이터 통신 오류.. 관리자에게 문의바랍니다.'); history.go(-1);</script>");
+			pr.print("<script>alert('데이터 통신 오류, 서버 관리자에게 문의하세요'); history.go(-1);</script>");
 		}
 	}
 }
