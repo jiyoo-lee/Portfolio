@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import admin.exception.NoConfigurationException;
 import admin.exception.NoPermissionAdminException;
 import admin.exception.UserNotFoundException;
 
@@ -42,7 +44,6 @@ public class AdminDAO {
 		this.ps.setString(6, adminList.get(5));
 		this.ps.setString(7, adminList.get(6));
 		
-		connection.close();
 		return ps.executeUpdate();
 	}
 	
@@ -74,7 +75,6 @@ public class AdminDAO {
 			waitingMembers.add(member);
 		}
 		
-		connection.close();
 		return waitingMembers;
 	}
 	
@@ -86,7 +86,6 @@ public class AdminDAO {
 		
 		ResultSet rs = ps.executeQuery();
 		
-		connection.close();
 		return rs.next() ;
 	}
 	
@@ -118,7 +117,6 @@ public class AdminDAO {
 		String SQL = "insert into login_log values('0','"+id+"','"+today+"')";
 		this.ps = connection.prepareStatement(SQL);
 		
-		connection.close();
 		return ps.executeUpdate();
 	}
 	
@@ -168,40 +166,67 @@ public class AdminDAO {
 		return ps.executeUpdate();
 	}
 	
-	public EnvironmentDTO loadEnvironmentInfo() throws SQLException{
-		List<EnvironmentDTO> environmentInfoList = new ArrayList<>();
-		String sql = "select * from environment order by id limit 0,1";
+	public HomepageConfigDTO selectHomepageConfig() throws SQLException{
+		String sql = "select * "
+			       + "from homepage_configuration "
+			       + "order by id desc "
+			       + "limit 0, 1";
 		this.ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
-		while(rs.next()) {
-			String title = rs.getString("title");
-			String managerEmail = rs.getString("managerEmail");
-			String point = rs.getString("point");
-			String defaultPoint = rs.getString("default_point");
-			String level = rs.getString("level");
-			String company = rs.getString("company");
-			String registrationNumber = rs.getString("rg_number");
-			String director = rs.getString("director");
-			String directorNumber = rs.getString("director_number");
-			String reportNumber = rs.getString("report_number");
-			String valueNumber = rs.getString("value_number");
-			String postalcode = rs.getString("postalcode");
-			String companyAddr = rs.getString("company_addr");
-			String infoManger = rs.getString("info_manager");
-			String infoEmail = rs.getString("info_email");
-			EnvironmentDTO environment = new EnvironmentDTO(title, managerEmail, defaultPoint, point, level, company, registrationNumber, directorNumber, director, reportNumber, valueNumber, postalcode, companyAddr, infoManger, infoEmail);
+		if(rs.next()) {
+			HomepageConfigDTO homepageConfig = new HomepageConfigDTO();
+			homepageConfig.setId(rs.getLong("id"));
+			homepageConfig.setTitle(rs.getString("title"));
+			homepageConfig.setManagerEmail(rs.getString("manager_email"));
+			homepageConfig.setCompanyName(rs.getString("company_name"));
+			homepageConfig.setCompanyRegistrationNumber(rs.getString("company_registration_number"));
+			homepageConfig.setDirectorName(rs.getString("director_name"));
+			homepageConfig.setMainNumber(rs.getString("main_number"));
+			homepageConfig.setTelemarketingReportNumber(rs.getString("telemarketing_report_number"));
+			homepageConfig.setSupplementaryNumber(rs.getString("supplementary_number"));
+			homepageConfig.setBusinessZipCode(rs.getString("business_zip_code"));
+			homepageConfig.setBusinessAddress(rs.getString("business_address"));
+			homepageConfig.setInfoManagerName(rs.getString("info_manager_name"));
+			homepageConfig.setInfoManagerEmail(rs.getString("info_manager_email"));
+			homepageConfig.setMembershipReserves(rs.getInt("membership_reserves"));
+			homepageConfig.setMembershipLevel(rs.getString("membership_level"));
+			homepageConfig.setCreateDatetime(rs.getString("create_datetime"));
+			
+			return homepageConfig;
+		} else {
+			throw new NoConfigurationException();
 		}
-		return null;
 	}
 	
-	public List<PaymentConfigDTO> loadPaymentInfo() throws SQLException{
-		List<PaymentConfigDTO> paymentInfoList = new ArrayList<>();
-		String sql = "select * from payment_config";
-		
+	public PaymentConfigDTO selectPaymentConfig() throws SQLException{
+		String sql = "select * "
+			       + "from payment_configuration "
+			       + "order by id desc "
+			       + "limit 0, 1";
 		this.ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		
-		return paymentInfoList;
+				
+		if(rs.next()) {
+			PaymentConfigDTO paymentConfig = new PaymentConfigDTO();
+			paymentConfig.setId(rs.getLong("id"));
+			paymentConfig.setBankName(rs.getString("bank_name"));
+			paymentConfig.setAccountNumber(rs.getString("account_number"));
+			paymentConfig.setCreditUsage(rs.getString("credit_usage"));
+			paymentConfig.setMobileUsage(rs.getString("mobile_usage"));
+			paymentConfig.setVoucherUsage(rs.getString("voucher_usage"));
+			paymentConfig.setPointUsage(rs.getString("point_usage"));
+			paymentConfig.setMinUsagePoint(rs.getInt("min_usage_point"));
+			paymentConfig.setMaxUsagePoint(rs.getInt("max_usage_point"));
+			paymentConfig.setCashReceiptUsage(rs.getString("cash_receipt_usage"));
+			paymentConfig.setShippingCompanyName(rs.getString("shipping_company_name"));
+			paymentConfig.setShippingCost(rs.getInt("shipping_cost"));
+			paymentConfig.setDeliveryDateUsage(rs.getString("delivery_date_usage"));
+			paymentConfig.setCreateDatetime(rs.getString("create_datetime"));
+			
+			return paymentConfig;
+		} else {
+			throw new NoConfigurationException();
+		}
 	}
 }

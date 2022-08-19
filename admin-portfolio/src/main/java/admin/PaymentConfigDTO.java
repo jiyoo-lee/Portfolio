@@ -1,131 +1,168 @@
 package admin;
 
 public class PaymentConfigDTO {
-	
-	private String bank;
-	private String account;
-	private String min_point;
-	private String max_point;
-	private String credit;
-	private String mobile;
-	private String voucher;
-	private String receipt;
-	private String shipping_name;
-	private String shipping_cost;
-	private String delivery_date;
+	private Long id;
+	private String bankName;
+	private String accountNumber;
+	private String creditUsage;
+	private String mobileUsage;
+	private String voucherUsage;
+	private String pointUsage;
+	private Integer minUsagePoint;
+	private Integer maxUsagePoint;
+	private String cashReceiptUsage;
+	private String shippingCompanyName;
+	private Integer shippingCost;
+	private String deliveryDateUsage;
+	private String createDatetime;
 	
 	public PaymentConfigDTO() {
-		
-	}
-	
-	
-
-	public PaymentConfigDTO(String bank, String account, String min_point, String max_point, String credit,
-			String mobile, String voucher, String receipt, String shipping_name, String shipping_cost,
-			String delivery_date) {
 		super();
-		this.bank = bank;
-		this.account = account;
-		this.min_point = min_point;
-		this.max_point = max_point;
-		this.credit = credit;
-		this.mobile = mobile;
-		this.voucher = voucher;
-		this.receipt = receipt;
-		this.shipping_name = shipping_name;
-		this.shipping_cost = shipping_cost;
-		this.delivery_date = delivery_date;
 	}
 
-
-
-	public String getBank() {
-		return bank;
-	}
-
-	public void setBank(String bank) {
-		this.bank = bank;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getMin_point() {
-		return min_point;
-	}
-
-	public void setMin_point(String min_point) {
-		this.min_point = min_point;
-	}
-
-	public String getMax_point() {
-		return max_point;
-	}
-
-	public void setMax_point(String max_point) {
-		this.max_point = max_point;
-	}
-
-	public String getCredit() {
-		return credit;
-	}
-
-	public void setCredit(String credit) {
-		this.credit = credit;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getVoucher() {
-		return voucher;
-	}
-
-	public void setVoucher(String voucher) {
-		this.voucher = voucher;
-	}
-
-	public String getReceipt() {
-		return receipt;
-	}
-
-	public void setReceipt(String receipt) {
-		this.receipt = receipt;
-	}
-
-	public String getShipping_name() {
-		return shipping_name;
-	}
-
-	public void setShipping_name(String shipping_name) {
-		this.shipping_name = shipping_name;
-	}
-
-	public String getShipping_cost() {
-		return shipping_cost;
-	}
-
-	public void setShipping_cost(String shipping_cost) {
-		this.shipping_cost = shipping_cost;
-	}
-
-	public String getDelivery_date() {
-		return delivery_date;
-	}
-
-	public void setDelivery_date(String delivery_date) {
-		this.delivery_date = delivery_date;
+	public PaymentConfigDTO(Long id, String bankName, String accountNumber, String creditUsage, String mobileUsage,
+			String voucherUsage, String pointUsage, Integer minUsagePoint, Integer maxUsagePoint,
+			String cashReceiptUsage, String shippingCompanyName, Integer shippingCost, String deliveryDateUsage,
+			String createDatetime) {
+		super();
+		this.id = id;
+		this.bankName = bankName;
+		this.accountNumber = accountNumber;
+		this.creditUsage = creditUsage;
+		this.mobileUsage = mobileUsage;
+		this.voucherUsage = voucherUsage;
+		this.pointUsage = pointUsage;
+		this.minUsagePoint = minUsagePoint;
+		this.maxUsagePoint = maxUsagePoint;
+		this.cashReceiptUsage = cashReceiptUsage;
+		this.shippingCompanyName = shippingCompanyName;
+		this.shippingCost = shippingCost;
+		this.deliveryDateUsage = deliveryDateUsage;
+		this.createDatetime = createDatetime;
 	}
 	
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getCreditUsage() {
+		return creditUsage;
+	}
+
+	public void setCreditUsage(String creditUsage) {
+		this.creditUsage = creditUsage;
+	}
+
+	public String getMobileUsage() {
+		return mobileUsage;
+	}
+
+	public void setMobileUsage(String mobileUsage) {
+		this.mobileUsage = mobileUsage;
+	}
+
+	public String getVoucherUsage() {
+		return voucherUsage;
+	}
+
+	public void setVoucherUsage(String voucherUsage) {
+		this.voucherUsage = voucherUsage;
+	}
+
+	public String getPointUsage() {
+		return pointUsage;
+	}
+
+	public void setPointUsage(String pointUsage) {
+		this.pointUsage = pointUsage;
+	}
+
+	public Integer getMinUsagePoint() {
+		return minUsagePoint;
+	}
+
+	public void setMinUsagePoint(Integer minUsagePoint) {
+		this.minUsagePoint = minUsagePoint;
+	}
+
+	public Integer getMaxUsagePoint() {
+		return maxUsagePoint;
+	}
+
+	public void setMaxUsagePoint(Integer maxUsagePoint) {
+		this.maxUsagePoint = maxUsagePoint;
+	}
+
+	public String getCashReceiptUsage() {
+		return cashReceiptUsage;
+	}
+
+	public void setCashReceiptUsage(String cashReceiptUsage) {
+		this.cashReceiptUsage = cashReceiptUsage;
+	}
+
+	public String getShippingCompanyName() {
+		return shippingCompanyName;
+	}
+
+	public void setShippingCompanyName(String shippingCompanyName) {
+		this.shippingCompanyName = shippingCompanyName;
+	}
+
+	public Integer getShippingCost() {
+		return shippingCost;
+	}
+
+	public void setShippingCost(Integer shippingCost) {
+		this.shippingCost = shippingCost;
+	}
+
+	public String getDeliveryDateUsage() {
+		return deliveryDateUsage;
+	}
+
+	public void setDeliveryDateUsage(String deliveryDateUsage) {
+		this.deliveryDateUsage = deliveryDateUsage;
+	}
+
+	public String getCreateDatetime() {
+		return createDatetime;
+	}
+
+	public void setCreateDatetime(String createDatetime) {
+		this.createDatetime = createDatetime;
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentConfigDTO [id=" + id + ", bankName=" + bankName + ", accountNumber=" + accountNumber
+				+ ", creditUsage=" + creditUsage + ", mobileUsage=" + mobileUsage + ", voucherUsage=" + voucherUsage
+				+ ", pointUsage=" + pointUsage + ", minUsagePoint=" + minUsagePoint + ", maxUsagePoint=" + maxUsagePoint
+				+ ", cashReceiptUsage=" + cashReceiptUsage + ", shippingCompanyName=" + shippingCompanyName
+				+ ", shippingCost=" + shippingCost + ", deliveryDateUsage=" + deliveryDateUsage + ", createDatetime="
+				+ createDatetime + "]";
+	}
+	
+	
 }

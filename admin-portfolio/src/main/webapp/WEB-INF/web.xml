@@ -31,13 +31,13 @@
 </servlet-mapping>
 
   <servlet>
-	<servlet-name>setEnvironment</servlet-name>
-	<servlet-class>admin.Environment</servlet-class>
+	<servlet-name>Configuration</servlet-name>
+	<servlet-class>admin.ConfigurationController</servlet-class>
 </servlet>
 
 <servlet-mapping>
-	<servlet-name>setEnvironment</servlet-name>
-	<url-pattern>/admin/environment.do</url-pattern>
+	<servlet-name>Configuration</servlet-name>
+	<url-pattern>/admin/configuration.do</url-pattern>
 </servlet-mapping>
 
 

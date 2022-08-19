@@ -1,13 +1,7 @@
-<%@page import="admin.EnvironmentDTO"%>
-<%@page import="admin.PaymentConfigDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%
   	request.setCharacterEncoding("utf-8");
-  	List<EnvironmentDTO> list1 = (ArrayList<EnvironmentDTO>)request.getAttribute("environment");
-  	List<PaymentConfigDTO> list2 = (ArrayList<PaymentConfigDTO>)request.getAttribute("paymentConfig");
   %> 
 <!DOCTYPE html>
 <html lang="ko">

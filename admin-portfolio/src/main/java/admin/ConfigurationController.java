@@ -2,6 +2,7 @@ package admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -12,29 +13,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.exception.NoConfigurationException;
 
-public class Environment extends HttpServlet {
+
+public class ConfigurationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
-    public Environment() {
-     
-    }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
 			AdminDAO adminDao = new AdminDAO();
-			EnvironmentDTO a = adminDao.loadEnvironmentInfo();
-//			PaymentConfigDTO paymentConfig = adminDao.loadPaymentInfo();
-//			
-//			request.setAttribute("environment", environment);
-//			request.setAttribute("paymentConfig", paymentConfig);
+			HomepageConfigDTO homepageConfig = adminDao.selectHomepageConfig();
+			PaymentConfigDTO paymentConfig = adminDao.selectPaymentConfig();
+			
+			request.setAttribute("homepage", homepageConfig);
+			request.setAttribute("payment", paymentConfig);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("./admin_config.jsp");
 			rd.forward(request, response);
-		}catch (Exception e) {
-			e.getMessage();
+			
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoConfigurationException e) {
+			e.printStackTrace();
 		}
 	}
 
