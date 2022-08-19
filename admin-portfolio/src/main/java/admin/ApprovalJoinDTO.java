@@ -1,7 +1,5 @@
 package admin;
 
-import java.time.LocalDate;
-
 public class ApprovalJoinDTO {
 	
 	private Integer row;

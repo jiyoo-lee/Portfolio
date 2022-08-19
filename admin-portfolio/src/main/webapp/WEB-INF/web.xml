@@ -31,13 +31,15 @@
 </servlet-mapping>
 
   <servlet>
-	<servlet-name>registertest1</servlet-name>
-	<servlet-class>admin.Registeration2</servlet-class>
+	<servlet-name>setEnvironment</servlet-name>
+	<servlet-class>admin.Environment</servlet-class>
 </servlet>
 
 <servlet-mapping>
-	<servlet-name>registertest1</servlet-name>
-	<url-pattern>/admin/registeration2.do</url-pattern>
+	<servlet-name>setEnvironment</servlet-name>
+	<url-pattern>/admin/environment.do</url-pattern>
 </servlet-mapping>
+
+
 
 </web-app>

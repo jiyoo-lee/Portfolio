@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +42,7 @@ public class AdminDAO {
 		this.ps.setString(6, adminList.get(5));
 		this.ps.setString(7, adminList.get(6));
 		
+		connection.close();
 		return ps.executeUpdate();
 	}
 	
@@ -75,6 +74,7 @@ public class AdminDAO {
 			waitingMembers.add(member);
 		}
 		
+		connection.close();
 		return waitingMembers;
 	}
 	
@@ -85,6 +85,8 @@ public class AdminDAO {
 		ps.setString(1, id);
 		
 		ResultSet rs = ps.executeQuery();
+		
+		connection.close();
 		return rs.next() ;
 	}
 	
@@ -116,6 +118,7 @@ public class AdminDAO {
 		String SQL = "insert into login_log values('0','"+id+"','"+today+"')";
 		this.ps = connection.prepareStatement(SQL);
 		
+		connection.close();
 		return ps.executeUpdate();
 	}
 	
@@ -135,4 +138,70 @@ public class AdminDAO {
 		}
 	}
 
+	public int insertConfig(List<String>configList) throws SQLException{
+		
+		GetDatetiemUtil datetime = new GetDatetiemUtil();
+		String today = datetime.getNowDatetime();
+		String sql = "insert into environment values('0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
+		this.ps = connection.prepareStatement(sql);
+		
+		int w = 0;
+		while(w<configList.size()) {
+			this.ps.setString(w+1, configList.get(w));
+			w++;
+		}
+		return ps.executeUpdate();
+	}
+	
+	public int insertPaymentConfig(List<String>paymentList) throws SQLException{
+		
+		GetDatetiemUtil datetime = new GetDatetiemUtil();
+		String today = datetime.getNowDatetime();
+		String sql = "insert into payment_config values('0',?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
+		this.ps = connection.prepareStatement(sql);
+		
+		int w = 0;
+		while(w < paymentList.size()) {
+			this.ps.setString(w+1, paymentList.get(w));
+			w++;
+		}
+		return ps.executeUpdate();
+	}
+	
+	public EnvironmentDTO loadEnvironmentInfo() throws SQLException{
+		List<EnvironmentDTO> environmentInfoList = new ArrayList<>();
+		String sql = "select * from environment order by id limit 0,1";
+		this.ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			String title = rs.getString("title");
+			String managerEmail = rs.getString("managerEmail");
+			String point = rs.getString("point");
+			String defaultPoint = rs.getString("default_point");
+			String level = rs.getString("level");
+			String company = rs.getString("company");
+			String registrationNumber = rs.getString("rg_number");
+			String director = rs.getString("director");
+			String directorNumber = rs.getString("director_number");
+			String reportNumber = rs.getString("report_number");
+			String valueNumber = rs.getString("value_number");
+			String postalcode = rs.getString("postalcode");
+			String companyAddr = rs.getString("company_addr");
+			String infoManger = rs.getString("info_manager");
+			String infoEmail = rs.getString("info_email");
+			EnvironmentDTO environment = new EnvironmentDTO(title, managerEmail, defaultPoint, point, level, company, registrationNumber, directorNumber, director, reportNumber, valueNumber, postalcode, companyAddr, infoManger, infoEmail);
+		}
+		return null;
+	}
+	
+	public List<PaymentConfigDTO> loadPaymentInfo() throws SQLException{
+		List<PaymentConfigDTO> paymentInfoList = new ArrayList<>();
+		String sql = "select * from payment_config";
+		
+		this.ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		return paymentInfoList;
+	}
 }

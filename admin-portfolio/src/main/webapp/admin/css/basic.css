@@ -9,7 +9,7 @@ input:focus, button:focus, textarea:focus {outline:none;}
 button {border:0 none;background-color:transparent;cursor:pointer}
 body {background:#fff;-webkit-text-size-adjust:none;}
 body,th,td,input,select,textarea,button {font-size:12px; color:#333; font-family: 'Noto Sans KR', sans-serif;}
-a {color:#333;text-decoration:none}
+a {color:#ccc;text-decoration:none}
 a:active, a:hover {text-decoration:none;}
 span,label { display: block; }
 address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
