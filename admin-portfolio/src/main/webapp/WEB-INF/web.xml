@@ -13,33 +13,50 @@
   <servlet>
 	<servlet-name>register</servlet-name>
 	<servlet-class>admin.Registeration</servlet-class>
-</servlet>
+  </servlet>
 
-<servlet-mapping>
+  <servlet-mapping>
 	<servlet-name>register</servlet-name>
 	<url-pattern>/admin/registeration.do</url-pattern>
-</servlet-mapping>
+  </servlet-mapping>
 
   <servlet>
 	<servlet-name>login</servlet-name>
 	<servlet-class>admin.Login</servlet-class>
-</servlet>
+  </servlet>
 
-<servlet-mapping>
+  <servlet-mapping>
 	<servlet-name>login</servlet-name>
 	<url-pattern>/admin/login.do</url-pattern>
-</servlet-mapping>
+  </servlet-mapping>
 
   <servlet>
 	<servlet-name>Configuration</servlet-name>
 	<servlet-class>admin.ConfigurationController</servlet-class>
-</servlet>
+  </servlet>
 
-<servlet-mapping>
+  <servlet-mapping>
 	<servlet-name>Configuration</servlet-name>
-	<url-pattern>/admin/configuration.do</url-pattern>
-</servlet-mapping>
+	<url-pattern>/admin/configuration</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+	<servlet-name>Notice</servlet-name>
+	<servlet-class>admin.NoticeController</servlet-class>
+  </servlet>
 
+  <servlet-mapping>
+	<servlet-name>Notice</servlet-name>
+	<url-pattern>/admin/notice</url-pattern>
+  </servlet-mapping>
 
+  <servlet>
+	<servlet-name>Notice2</servlet-name>
+	<servlet-class>admin.NoticeDeleteController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>Notice2</servlet-name>
+	<url-pattern>/admin/notice-control</url-pattern>
+  </servlet-mapping>
 </web-app>

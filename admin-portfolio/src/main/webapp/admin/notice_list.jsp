@@ -1,7 +1,10 @@
+<%@page import="java.util.List"%>
+<%@page import="admin.NoticeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%
   	request.setCharacterEncoding("utf-8");
+  	List<NoticeDTO> notices = (List<NoticeDTO>)request.getAttribute("notices");
   %> 
 <meta charset="UTF-8">
 <p>공지사항 관리페이지</p>
@@ -14,21 +17,25 @@
     <li>날짜</li>
     <li>조회</li>
 </ul>
+<%for(NoticeDTO notice : notices){ %>
 <ol>
-    <li><input type="checkbox"></li>
-    <li>1</li>
-    <li>테스트 제목</li>
-    <li>관리자</li>
-    <li>2022-08-17</li>
-    <li>100</li>
+    <li><input type="checkbox" name="deleteCheck" value="<%=notice.getId()%>"></li>
+    <li><%=notice.getRow()%></li>
+    <li><%=notice.getTitle()%></li>
+    <li><%=notice.getWriter() %></li>
+    <li><%=notice.getCreateDatetime().substring(0,10)%></li>
+    <li><%=notice.getViews() %></li>
 </ol>
+<% } %>
+
 <ol class="none_text">
     <li>등록된 공지 내용이 없습니다.</li>
 </ol>
+
 </div>
 <div class="board_btn">
-    <button class="border_del">공지삭제</button>
-    <button class="border_add">공지등록</button>
+    <button class="border_del" onclick="noticeDeletor()">공지삭제</button>
+    <button class="border_add" onclick="noticeRegistor()">공지등록</button>
 </div>
 <div class="border_page">
     <ul class="pageing">

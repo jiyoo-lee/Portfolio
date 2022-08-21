@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import admin.exception.NoConfigurationException;
 import admin.exception.NoPermissionAdminException;
@@ -136,31 +136,32 @@ public class AdminDAO {
 		}
 	}
 
-	public int insertConfig(List<String>configList) throws SQLException{
+	public int insertHomepageConfig( Map<String, String> homepageParam, String[] homepageFields) throws SQLException{
 		
 		GetDatetiemUtil datetime = new GetDatetiemUtil();
 		String today = datetime.getNowDatetime();
-		String sql = "insert into environment values('0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
+		
+		String sql = "insert into homepage_configuration values ('0',?,?,?,?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
 		this.ps = connection.prepareStatement(sql);
 		
 		int w = 0;
-		while(w<configList.size()) {
-			this.ps.setString(w+1, configList.get(w));
+		while(w < homepageFields.length) {
+			this.ps.setString(w+1, homepageParam.get(homepageFields[w]));
 			w++;
 		}
-		return ps.executeUpdate();
+		return this.ps.executeUpdate();
 	}
 	
-	public int insertPaymentConfig(List<String>paymentList) throws SQLException{
+	public int insertPaymentConfig(Map<String, String> paymentParam, String[] paymentFields) throws SQLException{
 		
 		GetDatetiemUtil datetime = new GetDatetiemUtil();
 		String today = datetime.getNowDatetime();
-		String sql = "insert into payment_config values('0',?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
+		String sql = "insert into payment_configuration values('0',?,?,?,?,?,?,?,?,?,?,?,?,'"+today+"')";
 		this.ps = connection.prepareStatement(sql);
 		
 		int w = 0;
-		while(w < paymentList.size()) {
-			this.ps.setString(w+1, paymentList.get(w));
+		while(w < paymentFields.length) {
+			this.ps.setString(w+1, paymentParam.get(paymentFields[w]));
 			w++;
 		}
 		return ps.executeUpdate();
@@ -229,4 +230,75 @@ public class AdminDAO {
 			throw new NoConfigurationException();
 		}
 	}
+	
+	public Integer countNotices() throws SQLException {
+		String sql  = "select count(*) as count "
+				    + "from notice";
+		this.ps = connection.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		return rs.next() ? rs.getInt("count") : 0;
+	}
+	
+	public List<NoticeDTO> selectNotices() throws SQLException{
+		List<NoticeDTO> notices = new ArrayList<>();
+
+		String sql = "select id, title, writer, create_datetime, views "
+				   + "from notice "
+				   + "order by id desc";
+		this.ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.last();
+		int rowNum = rs.getRow();
+		rs.beforeFirst();
+		
+		while(rs.next()) {
+			NoticeDTO notice = new NoticeDTO();
+			notice.setId(rs.getLong("id"));
+			notice.setTitle(rs.getString("title"));
+			notice.setWriter(rs.getString("writer"));
+			notice.setCreateDatetime(rs.getString("create_datetime"));
+			notice.setViews(rs.getInt("views"));
+			notice.setRow(rowNum--);
+			
+			notices.add(notice);
+		}
+		return notices;
+	}
+	
+	public int insertNotices(List<String>noticeRegistration) throws SQLException {
+		String sql = "insert into notice(title, writer, top_exposure, content, attachments) "
+				   + "values(?, ?, ?, ?, ?)";
+		this.ps = connection.prepareStatement(sql);
+		
+		int w = 0;
+		while(w < noticeRegistration.size()) {
+			this.ps.setString(w+1, noticeRegistration.get(w++));
+		}
+		return this.ps.executeUpdate();
+	}
+	
+	public int deleteNotices(String[] index) throws SQLException{
+		String questionMarks = "";
+		for(int i = 0; i < index.length-1; i++) {
+			questionMarks += "?,";
+		}
+		questionMarks += "?";
+		
+		String sql = "delete from notice where id in ("+questionMarks+")";
+		try{
+			this.ps = connection.prepareStatement(sql);
+			int seq = 0;
+			while(seq < index.length) {
+				this.ps.setString(seq+1, index[seq]);
+				seq++;
+			}		
+			return ps.executeUpdate();
+		}finally {
+			if(this.ps != null )this.ps.close();
+			if(this.connection != null )this.connection.close();
+		}
+	}
 }
+

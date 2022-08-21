@@ -1,11 +1,11 @@
 
-function cancel() {
-	if(confirm("작성을 취소하시겠습니까?")){
-		location.href = "./admin_config.jsp";
-	}
-}
-
 $(function(){
+	
+		$("#config_cancel").click(function(){
+			alert("작성이 취소되었습니다.");
+			location.href="./configuration";	
+	})
+
 		$("#config_save").click(function() {
 			
 			var $config_title = $("#config_title").val();
@@ -20,7 +20,7 @@ $(function(){
 			var $report_number = $("#report_number").val();
 			var $value_number = $("#value_number").val();
 			var $postalcode = $("#postalcode").val();
-			var $company_addr = $("#compay_addr").val();
+			var $company_addr = $("#company_addr").val();
 			var $info_manager = $("#info_manager").val();
 			var $info_email = $("#info_email").val();
 			var $bank = $("#bank").val();
@@ -38,8 +38,7 @@ $(function(){
 			if($config_title == "" || $config_email == "" || $point == "" || $default_point == "" || $level == "")
 				{ alert("홈페이지 가입 환경설정 정보를 모두 입력해주세요."); }
 			else if ($company == "" || $rg_num == "" || $m_director == "" ||  
-					 $postalcode == "" || $company_addr == "" ||
-					$info_manager == "" || $info_email == "" )
+					 $postalcode == "" || $company_addr == "" || $info_manager == "" || $info_email == "")
 					{ alert("홈페이지 기본 환경설정 정보를 모두 입력해주세요.");}	
 			else if($bank == ""|| $bank_account == "" || $min_point == "" || $max_point == "" ||
 					$shipping_name == "" || $shipping_cost == "") 
@@ -58,11 +57,14 @@ $(function(){
 					alert("올바른 계좌 형식이 아닙니다.");
 				}
 				else{
-					frm.method ="POST";
-					frm.enctype="application/x-www-form-urlencoded";
-					frm.action = "./environment.do";
-					frm.submit();
+					if(confirm("저장하시겠습니까?")){						
+						frm.method ="POST";
+						frm.enctype="application/x-www-form-urlencoded";
+						frm.action = "./configuration";
+						frm.submit();
+					}
 				}
 			}
 		})
+		
 });

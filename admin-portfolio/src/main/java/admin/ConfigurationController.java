@@ -3,9 +3,8 @@ package admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,41 +43,40 @@ public class ConfigurationController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter pr = response.getWriter();
 		
-		Enumeration<String> em = request.getParameterNames();
-		List<String> configList = new ArrayList<>();
-		List<String> paymentList = new ArrayList<>();
-		
-		String[] config = {"title","email","point","defaultPoint","level","company","rgNumber","director",
-							"directorNumber","reportNumber","valueNumber","postalcode","companyAddr"
-							,"infoManager","infoEmail"};
-		String[] payment = {"bank","bankAccount","credit","mobile","voucher","minPoint","maxPoint","receipt",
-				"shippingName", "shipping_cost", "deliveryDate"};
-
-		while(em.hasMoreElements()) {
-			String temp = em.nextElement();
-			String value = request.getParameter(temp);
-			for(int i = 0; i < config.length; i++) {
-				if(temp.equals(config[i])) {
-					configList.add(value);
-				}
-			}
-			for(int j = 0; j < payment.length; j++) {
-				if(temp.equals(payment[j])) {
-					paymentList.add(value);
-				}
-			}
-		}
 		try {
-			AdminDAO adminDao = new AdminDAO();
-			int set1 = adminDao.insertConfig(configList);
-			int set2 = adminDao.insertPaymentConfig(paymentList);
+			AdminDAO adminDAO = new AdminDAO();
 			
-			if(set1 > 0 && set2 > 0) {
-				pr.print("<script>alert('입력이 완료되었습니다.'); location.href='admin_config.jsp';</script>");
+			Map<String, String[]> parameterMap = request.getParameterMap();
+			
+			Map<String, String> homepageParam = new HashMap<>();
+			String[] homepageFields = {"title", "managerEmail", "companyName", "companyRegistrationNumber",
+					"directorName", "mainNumber", "telemarketingReportNumber", "supplementaryNumber", "businessZipCode",
+					"businessAddress", "infoManagerName", "infoManagerEmail", "membershipReserves", "membershipLevel"};
+			for (String field : homepageFields) {
+				homepageParam.put(field, parameterMap.get(field)[0]);	
 			}
-		}catch (Exception e) {
+			
+			int homepageConfigResult = adminDAO.insertHomepageConfig(homepageParam, homepageFields);
+			
+			Map<String, String> paymentParam = new HashMap<>();
+			String[] paymentFields = {"bankName", "accountNumber", "creditUsage", "mobileUsage", "voucherUsage",
+					"pointUsage", "minUsagePoint", "maxUsagePoint", "cashReceiptUsage", "shippingCompanyName",
+					"shippingCost", "deliveryDateUsage"};
+			for (String field : paymentFields) {
+				paymentParam.put(field, parameterMap.get(field)[0]);
+			}
+			
+			int paymentConfigResult = adminDAO.insertPaymentConfig(paymentParam, paymentFields);
+			
+			if(homepageConfigResult > 0 && paymentConfigResult > 0) {
+				pr.print("<script>alert('설정이 완료되었습니다.'); location.href='./configuration';</script>");
+			}else {
+				throw new SQLException();
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-			pr.print("<script>alert('데이터 통신 오류, 서버 관리자에게 문의바랍니다.'); location.href='admin_config.jsp';</script>");
 		}
+		
 	}
 }

@@ -19,6 +19,7 @@
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
     <script src="./js/jquery.js"></script>
+    <script src="./notice_list.js"></script>
 </head>
 <body>
 <header class="headercss">
@@ -29,7 +30,7 @@
 </nav>
 <main class="maincss">
 <section style="height: auto;">
-<%@include file="./notice_list.html" %>
+<%@include file="./notice_list.jsp" %>
 </section>
 </main>
 <footer class="main_copyright">

@@ -1,6 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <%
+  	request.setCharacterEncoding("utf-8");
+  %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<%-- 	<%@include file = "./mainSession.jsp"%> --%>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,21 +20,24 @@
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
     <script src="./js/jquery.js"></script>
+    <script src="./notice_write.js"></script>
 </head>
 <body>
 <header class="headercss">
-<!-- admin_header.html -->
+<%@include file="./admin_header.html" %>
 </header>
 <nav class="navcss">
-<!-- admin_menu.html -->
+<%@include file="./admin_menu.html" %>
 </nav>
 <main class="maincss">
+<form name="frm" id="frm">
 <section style="height: auto;">
-<!--notice_write.html-->
+<%@include file="./notice_write.jsp"%>
 </section>
+</form>
 </main>
 <footer class="main_copyright">
-<!--admin_footer.html-->
+<%@include file="./admin_footer.html" %>
 </footer>
 </body>
 </html>
