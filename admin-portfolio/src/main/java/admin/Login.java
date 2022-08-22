@@ -39,7 +39,7 @@ public class Login extends HttpServlet {
 			
 			// 20분짜리 세션생성
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(1*10);
+			session.setMaxInactiveInterval(20*60);
 			
 			if (session.isNew() || session.getAttribute("name") == null) {
 					session.setAttribute("name", name);

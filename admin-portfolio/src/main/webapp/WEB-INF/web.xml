@@ -59,4 +59,14 @@
 	<servlet-name>Notice2</servlet-name>
 	<url-pattern>/admin/notice-control</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+	<servlet-name>updateAccess</servlet-name>
+	<servlet-class>admin.ApprovalAccessController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>updateAccess</servlet-name>
+	<url-pattern>/admin/approval-access</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -299,6 +299,14 @@ public class AdminDAO {
 			if(this.ps != null )this.ps.close();
 			if(this.connection != null )this.connection.close();
 		}
+		
+		
+	}
+	public int updateAccess(String sign)throws SQLException{
+		
+		String sql = "update admin_list set access";
+		
+		return 0;
 	}
 }
 
