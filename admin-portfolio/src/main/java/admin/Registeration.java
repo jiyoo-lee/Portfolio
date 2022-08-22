@@ -65,13 +65,13 @@ public class Registeration extends HttpServlet {
 				int insert = rd.insert(adminList);
 				
 				if(insert > 0) {
-					pr.print("<script>alert('관리자 등록이 완료되었습니다. 담당자 승인 후 사용가능합니다.'); location.href = './index.html';</script>");
+					pr.print("<script>alert('관리자 등록이 완료되었습니다. 담당자 승인 후 사용가능합니다.'); location.href = './index.jsp';</script>");
 				}
 				else {
 					throw new Exception("error-!");
 				}
 			}catch (Exception e) {
-				pr.print("<script>alert('데이터 통신오류로 등록이 취소되었습니다. 담당자에게 문의바랍니다.')</script>");
+				pr.print("<script>alert('데이터 통신오류로 등록이 취소되었습니다. 담당자에게 문의바랍니다.') history.go(-1);</script>");
 			}
 		}
 	}

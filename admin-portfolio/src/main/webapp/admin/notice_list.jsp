@@ -10,13 +10,14 @@
 <p>공지사항 관리페이지</p>
 <div class="subpage_view">
 <ul>
-    <li><input type="checkbox"></li>
+    <li><input type="checkbox" name="deleteCheck" onclick="selectAll(this)"></li>
     <li>NO</li>
     <li>제목</li>
     <li>글쓴이</li>
     <li>날짜</li>
     <li>조회</li>
 </ul>
+<%if(notices.size() != 0){ %>
 <%for(NoticeDTO notice : notices){ %>
 <ol>
     <li><input type="checkbox" name="deleteCheck" value="<%=notice.getId()%>"></li>
@@ -27,11 +28,11 @@
     <li><%=notice.getViews() %></li>
 </ol>
 <% } %>
-
+<%}else{ %>
 <ol class="none_text">
     <li>등록된 공지 내용이 없습니다.</li>
 </ol>
-
+<%} %>
 </div>
 <div class="board_btn">
     <button class="border_del" onclick="noticeDeletor()">공지삭제</button>

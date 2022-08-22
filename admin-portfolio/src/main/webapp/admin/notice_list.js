@@ -4,6 +4,16 @@ function noticeRegistor(){
 	location.href ="./admin_notice_write.jsp";
 }
 
+function selectAll(selectAll)  {
+  const checkboxes 
+       = document.getElementsByName("deleteCheck");
+  
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = selectAll.checked;
+  })
+}
+
+
 function noticeDeletor(){
 	var checkboxes = document.getElementsByName("deleteCheck");
 	
