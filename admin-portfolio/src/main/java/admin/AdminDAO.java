@@ -51,7 +51,7 @@ public class AdminDAO {
 		List<ApprovalJoinDTO> waitingMembers = new ArrayList<>();
 		int startRow = (sequence-1) * pageSize;
 		
-		String sql = "select @rownum := @rownum+1 as row, a.name, a.admin_id, a.tel, a.email, a.department, a.position, a.indatetime "
+		String sql = "select @rownum := @rownum+1 as row, a.id, a.name, a.admin_id, a.tel, a.email, a.department, a.position, a.indatetime "
 				   + "from admin_list a, (select @rownum := 0) r "
 				   + "where a.access = 'W' "
 				   + "order by row desc "
@@ -63,6 +63,8 @@ public class AdminDAO {
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			ApprovalJoinDTO member = new ApprovalJoinDTO();
+			
+			member.setId(Integer.parseInt(rs.getString("id")));
 			member.setRow(Integer.parseInt(rs.getString("row")));
 			member.setName(rs.getString("name"));
 			member.setAdminId(rs.getString("admin_id"));
@@ -302,11 +304,14 @@ public class AdminDAO {
 		
 		
 	}
-	public int updateAccess(String sign)throws SQLException{
+	public int updateAccess(String sign, String id)throws SQLException{
 		
-		String sql = "update admin_list set access";
+		String sql = "update admin_list set access = ? where id = ?";
+		this.ps = connection.prepareStatement(sql);
+		this.ps.setString(1, sign);
+		this.ps.setString(2, id);
 		
-		return 0;
+		return this.ps.executeUpdate();
 	}
 }
 

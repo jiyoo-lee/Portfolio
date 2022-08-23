@@ -2,6 +2,8 @@ package admin;
 
 public class ApprovalJoinDTO {
 	
+	private Integer id;
+	
 	private Integer row;
 	
 	private String name;
@@ -19,11 +21,14 @@ public class ApprovalJoinDTO {
 	private String createDate;
 
 	public ApprovalJoinDTO() {
+		
 	}
 
-	public ApprovalJoinDTO(Integer row, String name, String adminId, String phoneNumber, String email,
+	
+	public ApprovalJoinDTO(Integer id, Integer row, String name, String adminId, String phoneNumber, String email,
 			String department, String position, String createDate) {
 		super();
+		this.id = id;
 		this.row = row;
 		this.name = name;
 		this.adminId = adminId;
@@ -33,6 +38,17 @@ public class ApprovalJoinDTO {
 		this.position = position;
 		this.createDate = createDate;
 	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 	public Integer getRow() {
 		return row;

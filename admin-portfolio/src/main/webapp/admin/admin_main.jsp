@@ -19,15 +19,18 @@
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
     <script src="./js/jquery.js"></script>
+	<script src = "./admin_list.js"></script>
 </head>
 <body>
 <header class="headercss"><%@include file="./admin_header.html" %></header>
 <nav class="navcss"><%@include file="./admin_menu.html" %></nav>
+<form name ="frm" id="frm">
 <main class="maincss">
 <section><%@include file="./admin_list.jsp"%></section>
 <section></section>
 <section></section>
 </main>
+</form>
 <footer class="main_copyright"><%@include file="./admin_footer.html" %></footer>
 </body>
 </html>

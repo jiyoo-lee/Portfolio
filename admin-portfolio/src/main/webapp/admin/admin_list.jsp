@@ -97,8 +97,10 @@
     <li><%=position%></li>
     <li><%=member.getCreateDate()%></li>
     <li>
-        <input type="button" value="승인" class="new_addbtn1" title="승인" name ="approval" onclick ="confirm('Y','<%=member.getAdminId()%>')">
-        <input type="button" value="미승인" class="new_addbtn2" title="미승인" onclick="deny('N')">
+        <input type="button" value="승인" class="new_addbtn1" title="승인" name="approval" id="approval">
+        <input type ="hidden" value="<%=member.getId()%>" id="Y" name="sign1">
+        <input type="button" value="미승인" class="new_addbtn2" title="미승인" name="approval" id="deny">
+        <input type ="hidden" value="<%=member.getId()%>" id="N" name="sign2">
     </li>
 </ol>
   <% } 
@@ -107,14 +109,3 @@
 <% for(int i = 1; i <= pageCount; i++) {%>
 	<ol style = "border:1px solid black; width: 20px; height: 30px;"><li><a href = "./admin_main.jsp?page=<%=i%>"><%=i %></a></li></ol>
 <%	}%>
-
-
-<script>
-	function confirm(j,a) {
-		location.href = "./approval-access?update=" + j + "&id=" + a; 
-	}
-	
-	function deny(j) {
-		location.href = "./approval-access?update=" + j;
-	}
-</script>
