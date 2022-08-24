@@ -310,7 +310,6 @@ public class AdminDAO {
 		this.ps.setString(1, access);
 		this.ps.setString(2, id);
 		
-		System.out.println(ps);
 		return this.ps.executeUpdate();
 	}
 }
