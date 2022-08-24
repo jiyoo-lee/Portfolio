@@ -19,7 +19,7 @@
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
     <script src="./js/jquery.js"></script>
-	<script src = "./admin_list.js"></script>
+    <script src = "./admin_list.js"></script>
 </head>
 <body>
 <header class="headercss"><%@include file="./admin_header.html" %></header>

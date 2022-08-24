@@ -23,17 +23,18 @@ public class ApprovalAccessController extends HttpServlet {
 
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter pr = response.getWriter();
-		String access = request.getParameter("update");
-		String id = request.getParameter("id");
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html; charset=utf-8");
+		PrintWriter pr = resp.getWriter();
+		String id = req.getParameter("id");
+		String access = req.getParameter("access");
 		
 		try {
 			AdminDAO adminDAO = new AdminDAO();
-			int data = adminDAO.updateAccess(access,id);
+			int data = adminDAO.updateAccess(id,access);
 			
 			if(data > 0) {
 				pr.print("success");				
@@ -46,5 +47,6 @@ public class ApprovalAccessController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
 
 }

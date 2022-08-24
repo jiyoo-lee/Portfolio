@@ -97,10 +97,8 @@
     <li><%=position%></li>
     <li><%=member.getCreateDate()%></li>
     <li>
-        <input type="button" value="승인" class="new_addbtn1" title="승인" name="approval" id="approval">
-        <input type ="hidden" value="<%=member.getId()%>" id="Y" name="sign1">
-        <input type="button" value="미승인" class="new_addbtn2" title="미승인" name="approval" id="deny">
-        <input type ="hidden" value="<%=member.getId()%>" id="N" name="sign2">
+        <input type="button" value="승인" class="new_addbtn1" title="Y" name="approval" id="<%=member.getId()%>" onclick="app(this.id,this.title)">
+        <input type="button" value="미승인" class="new_addbtn2" title="N" name="deny" id="<%=member.getId()%>" onclick="app(this.id,this.title)">
     </li>
 </ol>
   <% } 

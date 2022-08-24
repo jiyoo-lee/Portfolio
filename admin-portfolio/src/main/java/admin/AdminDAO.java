@@ -302,15 +302,15 @@ public class AdminDAO {
 			if(this.connection != null )this.connection.close();
 		}
 		
-		
 	}
-	public int updateAccess(String sign, String id)throws SQLException{
+	public int updateAccess(String id, String access)throws SQLException{
 		
 		String sql = "update admin_list set access = ? where id = ?";
 		this.ps = connection.prepareStatement(sql);
-		this.ps.setString(1, sign);
+		this.ps.setString(1, access);
 		this.ps.setString(2, id);
 		
+		System.out.println(ps);
 		return this.ps.executeUpdate();
 	}
 }
