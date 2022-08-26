@@ -3,7 +3,6 @@
 <%@include file = "./mainSession.jsp"%>    
   <%
   	request.setCharacterEncoding("utf-8");
-  
   %>
 <meta charset="UTF-8">
 <p>공지사항 등록</p>
@@ -19,7 +18,6 @@
          공지 출력
         </label>
          ※ 공지출력을 체크할 시 해당 글 내용은 최상단에 노출 되어 집니다.
-    	
     </li>
 </ul>
 <ul>

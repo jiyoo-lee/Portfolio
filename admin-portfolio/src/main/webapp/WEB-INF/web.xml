@@ -69,4 +69,15 @@
 	<servlet-name>updateAccess</servlet-name>
 	<url-pattern>/admin/approval-access</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+	<servlet-name>CategoryList</servlet-name>
+	<servlet-class>admin.CategoryController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>CategoryList</servlet-name>
+	<url-pattern>/admin/category-list</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
