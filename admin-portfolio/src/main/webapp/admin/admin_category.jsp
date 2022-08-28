@@ -30,7 +30,7 @@
 </nav>
 <main class="maincss">
 <section style="height: auto;">
-<%@include file="./cate_list.jsp" %>
+<%@include file="./cate_list.jsp"%>
 </section>
 </main>
 <footer class="main_copyright">

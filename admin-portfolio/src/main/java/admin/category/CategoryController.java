@@ -29,7 +29,7 @@ public class CategoryController extends HttpServlet {
 			CategoryDAO categoryDAO = new CategoryDAO();
 			String search = request.getParameter("search");
 			String keyword = request.getParameter("keyword");
-			
+						
 			List<CategoryDTO> categories;
 			if ("1".equals(search)) {
 				categories = categoryDAO.selectByName(keyword);
@@ -59,6 +59,7 @@ public class CategoryController extends HttpServlet {
 		try {
 			String largeMenuCode = request.getParameter("largeMenuCode");
 			String smallMenuCode = request.getParameter("smallMenuCode");
+			
 
 			if (largeMenuCode.length() != 3) {
 				throw new InvaildCategoryCodeException("대분류코드는 3글자로 입력해주세요. [예시: 001, 123]");

@@ -46,6 +46,6 @@
 </ul>
 </div>
 <div class="board_btn">
-    <button class="border_del" location.href="./admin_notice.jsp">공지목록</button>
+    <button class="border_del" location.href="./category">공지목록</button>
     <button class="border_add" onclick="register()">공지등록</button>
 </div>

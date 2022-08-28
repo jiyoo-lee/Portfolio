@@ -10,16 +10,16 @@
 <p>카테고리관리 페이지</p>
 <div class="subpage_view">
     <span>등록된 카테고리 0건</span>
-    <span>
         <form name="frm" id="frm">
+    <span>
         <select class="p_select1" id="select">
             <option value="1">카테고리명</option>
             <option value="2">카테고리코드</option>
         </select>
         <input type="text" class="p_input1" placeholder="검색어를 입력해 주세요" id="keyword" name="keyword">
         <input type="submit" value="검색" title="카테고리 검색" class="p_submit" onclick="search()">
-       </form>
     </span>
+       </form>
 </div>
 <div class="subpage_view2">
     <ul>

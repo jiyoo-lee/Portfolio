@@ -1,6 +1,5 @@
 function categoryList(){
-	
-	location.href="./admin_category.jsp";
+	location.href="./category";
 }
 
 function code(){
