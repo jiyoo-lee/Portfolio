@@ -24,18 +24,21 @@ public class CategoryController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
+		PrintWriter pw = response.getWriter();
 		
 		try {
 			CategoryDAO categoryDAO = new CategoryDAO();
 			String search = request.getParameter("search");
 			String keyword = request.getParameter("keyword");
-						
+									
 			List<CategoryDTO> categories;
 			if ("1".equals(search)) {
 				categories = categoryDAO.selectByName(keyword);
+				pw.print("success");
 			}
 			else if ("2".equals(search)) {
 				categories = categoryDAO.selectByCode(keyword);
+				pw.print("success");
 			}
 			else {
 				categories = categoryDAO.selectAll();

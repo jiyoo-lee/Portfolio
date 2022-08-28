@@ -12,11 +12,6 @@ function search(){
 		alert("카테코리 코드로 검색시 숫자로만 검색 가능합니다.");	
 	}
 	else{
-		frm.method = "get";
-		frm.enctype = "application/x-www-form-urlencoded";
-		frm.action = "./category";
-		console.log(categoryCode);
-		console.log(keyword);		
-//		frm.submit(); 	
-	}
-}
+		location.href="./category?search="+categoryCode+"&keyword="+keyword;
+	};
+}	

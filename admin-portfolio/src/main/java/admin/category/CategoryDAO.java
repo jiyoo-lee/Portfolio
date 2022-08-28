@@ -53,12 +53,12 @@ public class CategoryDAO {
 		
 		String sql = "select id, concat(1depth_code, 2depth_code) as code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
 				   + "from category "
-				   + "where 1depth_name like '%?%' "
-				   + "or 2depth_name like '%?%'";
+				   + "where 1depth_name like ? "
+				   + "or 2depth_name like ? ";
 		
 		ps = connection.prepareStatement(sql);
-		ps.setString(1, name);
-		ps.setString(2, name);
+		ps.setString(1, '%'+name+'%');
+		ps.setString(2, '%'+name+'%');
 		
 		ResultSet rs = ps.executeQuery();
 		
@@ -83,12 +83,14 @@ public class CategoryDAO {
 		
 		String sql = "select id, concat(1depth_code, 2depth_code) as code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
 				   + "from category "
-				   + "where 1depth_code like '%?%' "
-				   + "or 2depth_code like '%?%'";
+				   + "where 1depth_code like ? "
+				   + "or 2depth_code like ? "
+				   + "or concat(1depth_code, 2depth_code) = ? ";
 		
 		ps = connection.prepareStatement(sql);
-		ps.setString(1, code);
-		ps.setString(2, code);
+		ps.setString(1, '%'+code+'%');
+		ps.setString(2, '%'+code+'%');
+		ps.setString(3, code);
 		
 		ResultSet rs = ps.executeQuery();
 		
