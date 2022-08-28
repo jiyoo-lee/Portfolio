@@ -1,4 +1,4 @@
-package admin;
+package admin.approval;
 
 public class ApprovalJoinDTO {
 	

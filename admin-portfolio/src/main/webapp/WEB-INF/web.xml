@@ -12,7 +12,7 @@
   
   <servlet>
 	<servlet-name>register</servlet-name>
-	<servlet-class>admin.Registeration</servlet-class>
+	<servlet-class>admin.approval.Registeration</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -22,7 +22,7 @@
 
   <servlet>
 	<servlet-name>login</servlet-name>
-	<servlet-class>admin.Login</servlet-class>
+	<servlet-class>admin.login.Login</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -32,7 +32,7 @@
 
   <servlet>
 	<servlet-name>Configuration</servlet-name>
-	<servlet-class>admin.ConfigurationController</servlet-class>
+	<servlet-class>admin.configuration.ConfigurationController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -42,7 +42,7 @@
 
   <servlet>
 	<servlet-name>Notice</servlet-name>
-	<servlet-class>admin.NoticeController</servlet-class>
+	<servlet-class>admin.notice.NoticeController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -52,7 +52,7 @@
 
   <servlet>
 	<servlet-name>Notice2</servlet-name>
-	<servlet-class>admin.NoticeDeleteController</servlet-class>
+	<servlet-class>admin.notice.NoticeDeleteController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -62,7 +62,7 @@
   
     <servlet>
 	<servlet-name>updateAccess</servlet-name>
-	<servlet-class>admin.ApprovalAccessController</servlet-class>
+	<servlet-class>admin.approval.ApprovalAccessController</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -71,13 +71,13 @@
   </servlet-mapping>
   
    <servlet>
-	<servlet-name>CategoryList</servlet-name>
-	<servlet-class>admin.CategoryController</servlet-class>
+	<servlet-name>Category</servlet-name>
+	<servlet-class>admin.category.CategoryController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-	<servlet-name>CategoryList</servlet-name>
-	<url-pattern>/admin/category-list</url-pattern>
+	<servlet-name>Category</servlet-name>
+	<url-pattern>/admin/category</url-pattern>
   </servlet-mapping>
   
 </web-app>

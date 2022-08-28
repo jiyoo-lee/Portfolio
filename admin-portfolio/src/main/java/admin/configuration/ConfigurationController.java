@@ -1,4 +1,4 @@
-package admin;
+package admin.configuration;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.exception.NoConfigurationException;
+import admin.util.AdminDAO;
 
 
 public class ConfigurationController extends HttpServlet {

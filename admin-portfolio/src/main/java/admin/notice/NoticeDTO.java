@@ -1,4 +1,4 @@
-package admin;
+package admin.notice;
 
 public class NoticeDTO {
 

@@ -29,27 +29,28 @@ function registerCategory(){
 	var smallMenuCode = document.getElementById("smallMenuCode").value;
 	var smallMenu = document.getElementById("smallMenu").value;
 	var onlyLarge = document.getElementById("onlyLarge");
-	var hiddenValue = document.getElementById("");
+	var hiddenValue = document.getElementById("hiddenCheckbox").value;
 	
 	if(categoryCode == "" || largeMenuCode == "" || largeMenu == ""){
 		alert("모든 사항을 기입해주세요.");
 	}
-	else if(smallMenuCode == "" || smallMenu == "" && onlyLarge.value =="N"){
-		alert("대메뉴만 작성을 원하시면 대메뉴만 생성에 체크 해주세요.");
+	else if(hiddenValue == "Y" && (smallMenuCode != "" || smallMenu != "") ){
+		alert("대메뉴만 작성을 원하시면 소메뉴 작성칸을 삭제하고 대메뉴만 생성에 체크 해주세요.");
 	}
 	else{
 	 	if (onlyLarge.checked) {
 			onlyLarge.value = "Y";
 			document.getElementById("smallMenuCode").value = null;
 			document.getElementById("smallMenu").value = null;
+			console.log(hiddenValue);
 		}
 		else if(!onlyLarge.checked) {
 			onlyLarge.value = "N";
-			console.log(onlyLarge.value);
+			console.log(hiddenValue);
 		}
 			frm.method = "POST";
 			frm.enctype = "application/x-www-form-urlencoded";
-			frm.action = "./category-list";
-//			frm.submit();
+			frm.action = "./category";
+			frm.submit();
 		}
 	}

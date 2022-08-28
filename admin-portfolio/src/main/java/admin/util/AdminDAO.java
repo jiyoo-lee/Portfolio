@@ -1,4 +1,4 @@
-package admin;
+package admin.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import admin.approval.ApprovalJoinDTO;
+import admin.configuration.HomepageConfigDTO;
+import admin.configuration.PaymentConfigDTO;
 import admin.exception.NoConfigurationException;
 import admin.exception.NoPermissionAdminException;
 import admin.exception.UserNotFoundException;
+import admin.notice.NoticeDTO;
 
 public class AdminDAO {
 	

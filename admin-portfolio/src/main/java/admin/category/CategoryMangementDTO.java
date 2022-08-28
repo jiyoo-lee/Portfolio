@@ -1,4 +1,4 @@
-package admin;
+package admin.category;
 
 public class CategoryMangementDTO {
 	

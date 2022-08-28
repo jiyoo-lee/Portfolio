@@ -7,7 +7,7 @@ function app(id,access){
 		
 		ajax.onload = function () {
 		if(ajax.status == 200 && ajax.response == "success"){
-			alert("승인처리 되었습니다.");
+			alert("처리 되었습니다.");
 			location.reload();
 		}
 		else{

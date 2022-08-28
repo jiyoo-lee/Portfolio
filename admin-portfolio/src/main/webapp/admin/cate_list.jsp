@@ -1,21 +1,24 @@
+<%@page import="admin.category.CategoryDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
   	request.setCharacterEncoding("utf-8");
+	List<CategoryDTO> categories = (List<CategoryDTO>)request.getAttribute("categories");
   %> 
 <meta charset="UTF-8">
 <p>카테고리관리 페이지</p>
 <div class="subpage_view">
     <span>등록된 카테고리 0건</span>
     <span>
-        <form>
-        <select class="p_select1">
-            <option>카테고리명</option>
-            <option>카테고리코드</option>
+        <form name="frm" id="frm">
+        <select class="p_select1" id="select">
+            <option value="1">카테고리명</option>
+            <option value="2">카테고리코드</option>
         </select>
-        <input type="text" class="p_input1" placeholder="검색어를 입력해 주세요">
-        <input type="submit" value="검색" title="카테고리 검색" class="p_submit">
-        </form>
+        <input type="text" class="p_input1" placeholder="검색어를 입력해 주세요" id="keyword" name="keyword">
+        <input type="submit" value="검색" title="카테고리 검색" class="p_submit" onclick="search()">
+       </form>
     </span>
 </div>
 <div class="subpage_view2">
@@ -29,19 +32,27 @@
         <li>사용 유/무</li>
         <li>관리</li>
     </ul>
+    
+    <% if(categories.size() != 0) { 
+     	for(CategoryDTO category : categories) {
+    %>
     <ul>
         <li><input type="checkbox"></li>
-        <li style="text-align: left; text-indent: 5px;">분류코드</li>
-        <li>대메뉴 코드</li>
-        <li style="text-align: left; text-indent: 5px;">대메뉴명</li>
-        <li>소메뉴 코드</li>
-        <li style="text-align: left; text-indent: 5px;">소메뉴명</li>
-        <li>Y</li>
+        <li style="text-align: left; text-indent: 5px;"><%=category.getCode()%></li>
+        <li><%=category.getDepthCode1()%></li>
+        <li style="text-align: left; text-indent: 5px;"><%=category.getDepthName1()%></li>
+        <li><%=category.getDepthCode2()%></li>
+        <li style="text-align: left; text-indent: 5px;"><%=category.getDepthName2()%></li>
+        <li><%=category.getUsage()%></li>
         <li>[수정]</li>
     </ul>
+    <%
+     	}
+     } else { %>
     <ul>
         <li style="width: 100%;">등록된 카테고리가 없습니다.</li>
     </ul>
+    <% } %>
 </div>
 <div class="subpage_view3">
     <ul class="pageing">

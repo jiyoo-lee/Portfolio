@@ -1,4 +1,4 @@
-package admin;
+package admin.configuration;
 
 
 public class HomepageConfigDTO {

@@ -1,5 +1,5 @@
 <%@page import="java.util.List"%>
-<%@page import="admin.NoticeDTO"%>
+<%@page import="admin.notice.NoticeDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%
