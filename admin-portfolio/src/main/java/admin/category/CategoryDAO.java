@@ -26,7 +26,7 @@ public class CategoryDAO {
 	public List<CategoryDTO> selectAll() throws SQLException {
 		List<CategoryDTO> categories = new ArrayList<>();
 		
-		String sql = "select id, concat(1depth_code, 2depth_code) as code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
+		String sql = "select code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
 				   + "from category";
 		
 		ps = connection.prepareStatement(sql);
@@ -34,7 +34,6 @@ public class CategoryDAO {
 		
 		while(rs.next()) {
 			CategoryDTO category = new CategoryDTO();
-			category.setId(rs.getLong("id"));
 			category.setCode(rs.getString("code"));
 			category.setDepthCode1(rs.getString("1depth_code"));
 			category.setDepthCode2(rs.getString("2depth_code"));
@@ -51,7 +50,7 @@ public class CategoryDAO {
 	public List<CategoryDTO> selectByName(String name) throws SQLException {
 		List<CategoryDTO> categories = new ArrayList<>();
 		
-		String sql = "select id, concat(1depth_code, 2depth_code) as code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
+		String sql = "select code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
 				   + "from category "
 				   + "where 1depth_name like ? "
 				   + "or 2depth_name like ? ";
@@ -64,7 +63,6 @@ public class CategoryDAO {
 		
 		while(rs.next()) {
 			CategoryDTO category = new CategoryDTO();
-			category.setId(rs.getLong("id"));
 			category.setCode(rs.getString("code"));
 			category.setDepthCode1(rs.getString("1depth_code"));
 			category.setDepthCode2(rs.getString("2depth_code"));
@@ -81,7 +79,7 @@ public class CategoryDAO {
 	public List<CategoryDTO> selectByCode(String code) throws SQLException {
 		List<CategoryDTO> categories = new ArrayList<>();
 		
-		String sql = "select id, concat(1depth_code, 2depth_code) as code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
+		String sql = "select code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category "
 				   + "from category "
 				   + "where 1depth_code like ? "
 				   + "or 2depth_code like ? "
@@ -96,7 +94,6 @@ public class CategoryDAO {
 		
 		while(rs.next()) {
 			CategoryDTO category = new CategoryDTO();
-			category.setId(rs.getLong("id"));
 			category.setCode(rs.getString("code"));
 			category.setDepthCode1(rs.getString("1depth_code"));
 			category.setDepthCode2(rs.getString("2depth_code"));
@@ -110,26 +107,60 @@ public class CategoryDAO {
 		return categories;
 	}
 	
-	public int delete(Long id) throws SQLException {
+	public int delete(String code) throws SQLException {
 		String sql = "delete from category "
-				   + "where id = ?";
+				   + "where code = ?";
 		ps = connection.prepareStatement(sql);
-		ps.setLong(1, id);
+		ps.setString(1, code);
 		
 		return ps.executeUpdate();
 	}
 	
 	public int insert(CategoryCreationDTO category) throws SQLException {
-		String sql = "insert into category (1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category) "
-				   + "value (?, ?, ?, ?, ?)";
+		String sql = "insert into category (code, 1depth_code, 1depth_name, 2depth_code, 2depth_name, usage_category) "
+				   + "value (?, ?, ?, ?, ?, ?)";
 		
 		ps = connection.prepareStatement(sql);
-		ps.setString(1, category.getDepthCode1());
-		ps.setString(2, category.getDepthName1());
-		ps.setString(3, category.getDepthCode2());
-		ps.setString(4, category.getDepthName2());
-		ps.setString(5, category.getUsage());
+		ps.setString(1, category.getCategoryCode());
+		ps.setString(2, category.getDepthCode1());
+		ps.setString(3, category.getDepthName1());
+		ps.setString(4, category.getDepthCode2());
+		ps.setString(5, category.getDepthName2());
+		ps.setString(6, category.getUsage());
 		
 		return ps.executeUpdate();
+	}
+	
+	public List<Category1DepthCodeDTO> selectDepth1Code () throws SQLException{
+		List<Category1DepthCodeDTO> depth1CodeList = new ArrayList<>();
+		String sql = "select 1depth_code, 1depth_name from category group by 1depth_name";
+		this.ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Category1DepthCodeDTO category = new Category1DepthCodeDTO();
+			category.setDepth1Code(rs.getString("1depth_code"));
+			category.setDepth1Name(rs.getString("1depth_name"));
+			
+			depth1CodeList.add(category);
+		}
+		return depth1CodeList;
+	}
+	
+	public List<Category2DepthCodeDTO> selectDepth2Code (String depthCode) throws SQLException{
+		List<Category2DepthCodeDTO> depth2CodeList = new ArrayList<>();
+		String sql = "select code, 2depth_name from category where 1dpeth_code = ? ";
+		this.ps = connection.prepareStatement(sql);
+		this.ps.setString(1, depthCode);
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			Category2DepthCodeDTO category = new Category2DepthCodeDTO();
+			category.setCategoryCode(rs.getString("code"));
+			category.setDepth2Name(rs.getString("2depth_name"));
+			
+			depth2CodeList.add(category);
+		}
+		return depth2CodeList;
 	}
 }

@@ -19,6 +19,7 @@
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
     <script src="./js/jquery.js"></script>
+    <script src="./product_write.js"></script>
 </head>
 <body>
 <header class="headercss">

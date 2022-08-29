@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import admin.exception.InvaildCategoryCodeException;
 
 public class CategoryController extends HttpServlet {
@@ -60,17 +62,18 @@ public class CategoryController extends HttpServlet {
 
 		PrintWriter pw = response.getWriter();
 		try {
+			String categoryCode = request.getParameter("categoryCode");
 			String largeMenuCode = request.getParameter("largeMenuCode");
 			String smallMenuCode = request.getParameter("smallMenuCode");
 			
-
 			if (largeMenuCode.length() != 3) {
 				throw new InvaildCategoryCodeException("대분류코드는 3글자로 입력해주세요. [예시: 001, 123]");
-			} else if (smallMenuCode != null && smallMenuCode.length() != 3) {
+			} else if (smallMenuCode != "" && smallMenuCode.length() != 3) {
 				throw new InvaildCategoryCodeException("소분류코드는 3글자 또는 빈 값으로 입력해주세요. [예시: 001, 123, null]");
 			}
 
 			CategoryCreationDTO category = new CategoryCreationDTO();
+			category.setCategoryCode(categoryCode);
 			category.setDepthCode1(largeMenuCode);
 			category.setDepthName1(request.getParameter("largeMenu"));
 			category.setDepthCode2(smallMenuCode);
@@ -84,6 +87,8 @@ public class CategoryController extends HttpServlet {
 			} else {
 				throw new SQLException();
 			}
+		}catch (MySQLIntegrityConstraintViolationException e)	 {
+			pw.print("<script>alert('중복된 카테고리입니다. 리스트에서 확인해주세요.'); location.href='./category'; </script>");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 			pw.print("<script>alert('카테고리 등록을 실패했습니다.'); history.go(-1); </script>");

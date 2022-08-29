@@ -4,7 +4,7 @@ function category() {
 }
 function newproduct(){
 	
-	location.href = "./admin_product_write.jsp";
+	location.href = "./product";
 }
 	
 	

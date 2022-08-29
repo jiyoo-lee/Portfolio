@@ -1,24 +1,34 @@
 package admin.category;
 
 public class CategoryCreationDTO {
+	
+	private String categoryCode;
 	private String depthCode1;
 	private String depthName1;
 	private String depthCode2;
 	private String depthName2;
 	private String usage;
-
+	
 	public CategoryCreationDTO() {
-		super();
+
 	}
 
-	public CategoryCreationDTO(String depthCode1, String depthName1, String depthCode2, String depthName2,
-			String usage) {
-		super();
+	public CategoryCreationDTO(String categoryCode, String depthCode1, String depthName1, String depthCode2,
+			String depthName2, String usage) {
+		this.categoryCode = categoryCode;
 		this.depthCode1 = depthCode1;
 		this.depthName1 = depthName1;
 		this.depthCode2 = depthCode2;
 		this.depthName2 = depthName2;
 		this.usage = usage;
+	}
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	public String getDepthCode1() {
@@ -63,8 +73,7 @@ public class CategoryCreationDTO {
 
 	@Override
 	public String toString() {
-		return "CategoryCreationDTO [depthCode1=" + depthCode1 + ", depthName1=" + depthName1 + ", depthCode2="
-				+ depthCode2 + ", depthName2=" + depthName2 + ", usage=" + usage + "]";
+		return "CategoryCreationDTO [categoryCode=" + categoryCode + ", depthCode1=" + depthCode1 + ", depthName1="
+				+ depthName1 + ", depthCode2=" + depthCode2 + ", depthName2=" + depthName2 + ", usage=" + usage + "]";
 	}
-
 }

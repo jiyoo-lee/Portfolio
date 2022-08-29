@@ -80,4 +80,24 @@
 	<url-pattern>/admin/category</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+	<servlet-name>Product</servlet-name>
+	<servlet-class>admin.product.ProductController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>Product</servlet-name>
+	<url-pattern>/admin/product</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+	<servlet-name>CategoryCode</servlet-name>
+	<servlet-class>admin.category.CategoryCodeController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>CategoryCode</servlet-name>
+	<url-pattern>/admin/categorycode</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

@@ -1,7 +1,6 @@
 package admin.category;
 
 public class CategoryDTO {
-	private Long id;
 	private String code;
 	private String depthCode1;
 	private String depthName1;
@@ -13,24 +12,15 @@ public class CategoryDTO {
 		super();
 	}
 
-	public CategoryDTO(Long id, String code, String depthCode1, String depthName1, String depthCode2, String depthName2,
+	public CategoryDTO(String code, String depthCode1, String depthName1, String depthCode2, String depthName2,
 			String usage) {
 		super();
-		this.id = id;
 		this.code = code;
 		this.depthCode1 = depthCode1;
 		this.depthName1 = depthName1;
 		this.depthCode2 = depthCode2;
 		this.depthName2 = depthName2;
 		this.usage = usage;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getCode() {
@@ -83,8 +73,7 @@ public class CategoryDTO {
 
 	@Override
 	public String toString() {
-		return "CategoryDTO [id=" + id + ", code=" + code + ", depthCode1=" + depthCode1 + ", depthName1=" + depthName1
+		return "CategoryDTO [code=" + code + ", depthCode1=" + depthCode1 + ", depthName1=" + depthName1
 				+ ", depthCode2=" + depthCode2 + ", depthName2=" + depthName2 + ", usage=" + usage + "]";
 	}
-	
 }

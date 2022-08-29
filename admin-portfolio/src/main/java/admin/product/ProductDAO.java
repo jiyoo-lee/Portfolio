@@ -25,22 +25,5 @@ public class ProductDAO {
 		this.connection = DriverManager.getConnection(url,user,password);
 	}
 	
-	public int insertCategoryInfo(List<String> categoryList) throws SQLException {
-		
-		String sql = "insert into product_category(category_code,big_category,small_category) values(?,?,?,?,?,?,?)";
-		this.ps = connection.prepareStatement(sql);
-		for(int i = 0; i < categoryList.size(); i++) {
-			this.ps.setString(i+1, categoryList.get(i));			
-		}
-		return this.ps.executeUpdate();
-	}
-	
-	public List<CategoryMangementDTO> selectCategoryList () throws SQLException{
-		List<CategoryMangementDTO> list = new ArrayList<CategoryMangementDTO>();
-		
-		String sql = "select * from product_category";
-		
-		return list;
-	}
 }
 

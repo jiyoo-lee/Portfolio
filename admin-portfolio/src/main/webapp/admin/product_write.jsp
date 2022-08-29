@@ -1,7 +1,11 @@
+<%@page import="admin.category.CategoryDAO"%>
+<%@page import="admin.category.Category1DepthCodeDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
   	request.setCharacterEncoding("utf-8");
+	List<Category1DepthCodeDTO> depthList =  (List<Category1DepthCodeDTO>)request.getAttribute("depthList");
   %> 
 <meta charset="UTF-8">
 <p>상품 등록 페이지</p>
@@ -9,13 +13,17 @@
     <ul>
         <li>대메뉴 카테고리</li>
         <li>
-            <input type="text" class="product_input1"> 
+            <select onchange ="select(this.value);">
+            <%for(Category1DepthCodeDTO depth : depthList) { %>
+            	<option value="<%=depth.getDepth1Code()%>"><%=depth.getDepth1Name()%></option>
+            	<% } %>
+            </select>
         </li>
     </ul>
     <ul>
         <li>소메뉴 카테고리</li>
         <li>
-            <input type="text" class="product_input1"> 
+            <input type="text" class="product_input1" list = "<%%>"> 
         </li>
     </ul>
     <ul>
