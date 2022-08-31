@@ -100,4 +100,24 @@
 	<url-pattern>/admin/categorycode</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+	<servlet-name>ProductOverlap</servlet-name>
+	<servlet-class>admin.product.ProductOverlapController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>ProductOverlap</servlet-name>
+	<url-pattern>/admin/product/overlap</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>ProductCode</servlet-name>
+	<servlet-class>admin.product.ProductCodeController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>ProductCode</servlet-name>
+	<url-pattern>/admin/product-code/recommand</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

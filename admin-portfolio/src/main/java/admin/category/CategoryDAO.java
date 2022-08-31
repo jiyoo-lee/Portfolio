@@ -147,19 +147,16 @@ public class CategoryDAO {
 		return depth1CodeList;
 	}
 	
-	public List<Category2DepthCodeDTO> selectDepth2Code (String depthCode) throws SQLException{
-		List<Category2DepthCodeDTO> depth2CodeList = new ArrayList<>();
-		String sql = "select code, 2depth_name from category where 1dpeth_code = ? ";
+	public List<String> selectDepth2Code (String depthCode) throws SQLException{
+		List<String> depth2CodeList = new ArrayList<>();
+		String sql = "select code, 2depth_name from category where 1depth_code = ? ";
 		this.ps = connection.prepareStatement(sql);
 		this.ps.setString(1, depthCode);
 		ResultSet rs = ps.executeQuery();
-		
+				
 		while(rs.next()) {
 			Category2DepthCodeDTO category = new Category2DepthCodeDTO();
-			category.setCategoryCode(rs.getString("code"));
-			category.setDepth2Name(rs.getString("2depth_name"));
-			
-			depth2CodeList.add(category);
+			depth2CodeList.add(rs.getString("code")+","+rs.getString("2depth_name"));
 		}
 		return depth2CodeList;
 	}
