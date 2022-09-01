@@ -1,5 +1,6 @@
-function select(depthCode){
+function selectCategory1(depthCode){
 	$('#select2').empty();
+	$('#select2').append('<option>---선택---</option>');
 	
 	$.ajax({
 		type: "GET",
@@ -23,7 +24,7 @@ function select(depthCode){
 	})
 }
 
-function select2(categoryCode){
+function selectCategory2(categoryCode){
 	$.ajax({
 		type: "GET",
 		url: "./product-code/recommand",
@@ -54,10 +55,11 @@ function checkOverlap() {
 		datatype: "text",
 		success : function(data){
 			if (data == true) {
-				alert("상품코드가 중복됩니다요");
+				alert("상품코드가 중복됩니다.");
 			}
 			else{
 				alert("사용가능한 코드입니다.");
+				$('#overlapCheck').val("Y");
 			}
 		},
 		error : function(xhr){
@@ -75,6 +77,22 @@ function calculateDiscount() {
 	$('#discount_price').val(discount_price);
 }
 
+
 function registProduct() {
+	var overlapCheck = $("#overlapCheck").val();
+	var productCode = $("#product_code").val();
+	var productName = $("#productName").val();
+	var productSuDesc = $("#productSuDesc").val();
+	var price = $("#price").val();
+	var discount = $("#discount").val();
+	var discountPrice = $("#discount_price").val();
+	var stock = $("#stock").val();
+	var image1 = $("#iamge1").val();
+	var image2 = $("#iamge2").val();
+	var image3 = $("#iamge3").val();
 	
+	frm.method='POST';
+	frm.action="./product";
+	frm.enctype="multipart/form-data";
+	frm.submit();
 }

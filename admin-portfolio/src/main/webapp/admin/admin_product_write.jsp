@@ -29,9 +29,11 @@
 <%@include file="./admin_menu.html" %>
 </nav>
 <main class="maincss">
+<form name="frm" id="frm">
 <section style="height: auto;">
 <%@include file="./product_write.jsp"%>
 </section>
+</form>
 </main>
 <footer class="main_copyright">
 <%@include file="./admin_footer.html" %>

@@ -31,6 +31,7 @@ public class ProductDAO {
 				   + "from product "
 				   + "where code = ?";
 		this.ps = connection.prepareStatement(sql);
+		this.ps.setString(1, productCode);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			return rs.getInt("count");
@@ -54,6 +55,5 @@ public class ProductDAO {
 			throw new SQLException();
 		}
 	}
-	
 }
 

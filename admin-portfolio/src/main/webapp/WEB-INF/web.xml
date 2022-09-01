@@ -118,6 +118,5 @@
   <servlet-mapping>
 	<servlet-name>ProductCode</servlet-name>
 	<url-pattern>/admin/product-code/recommand</url-pattern>
-  </servlet-mapping>
-  
+  </servlet-mapping>  
 </web-app>
