@@ -119,4 +119,36 @@
 	<servlet-name>ProductCode</servlet-name>
 	<url-pattern>/admin/product-code/recommand</url-pattern>
   </servlet-mapping>  
+  
+    <servlet>
+	<servlet-name>ProductList</servlet-name>
+	<servlet-class>admin.product.ProductListController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>ProductList</servlet-name>
+	<url-pattern>/admin/product-list</url-pattern>
+  </servlet-mapping>  
+  
+      <servlet>
+	<servlet-name>ProductListDelete</servlet-name>
+	<servlet-class>admin.product.ProductDeleteController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>ProductListDelete</servlet-name>
+	<url-pattern>/admin/product/delete</url-pattern>
+  </servlet-mapping>  
+  
+    <servlet>
+	<servlet-name>ProductCoupon</servlet-name>
+	<servlet-class>admin.coupon.CouponController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>ProductCoupon</servlet-name>
+	<url-pattern>/admin/coupon</url-pattern>
+  </servlet-mapping>  
+  
+  
 </web-app>

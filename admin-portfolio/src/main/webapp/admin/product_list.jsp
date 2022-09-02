@@ -1,7 +1,10 @@
+<%@page import="admin.product.ProductDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
   	request.setCharacterEncoding("utf-8");
+	List<ProductDTO> products = (List<ProductDTO>)request.getAttribute("products");
   %> 
 <meta charset="UTF-8">
 <script>
@@ -14,19 +17,19 @@
 <div class="subpage_view">
     <span>등록된 상품 0건</span>
     <span>
-        <form>
-        <select class="p_select1">
-            <option>상품명</option>
-            <option>상품코드</option>
+       
+        <select class="p_select1" id="searchProduct">
+            <option value="1">상품명</option>
+            <option value="2">상품코드</option>
         </select>
-        <input type="text" class="p_input1" placeholder="검색어를 입력해 주세요">
-        <input type="submit" value="검색" title="상품검색" class="p_submit">
-        </form>
+        <input type="text" class="p_input1" placeholder="검색어를 입력해 주세요" id="productKeyword" name="productKeyword">
+        <input type="submit" value="검색" title="상품검색" class="p_submit" onclick="listsearch();">
+     
     </span>
 </div>
 <div class="subpage_view2">
     <ul>
-        <li><input type="checkbox"></li>
+        <li><input type="checkbox" name="productCheck" onclick="checkAll(this)"></li>
         <li>코드</li>
         <li>이미지</li>
         <li>상품명</li>
@@ -39,23 +42,30 @@
         <li>품절</li>
         <li>관리</li>
     </ul>
+     <% if(products.size() != 0) {
+     	for(ProductDTO product : products) { 
+     %>
     <ul>
-        <li><input type="checkbox"></li>
-        <li>상품코드</li>
-        <li>이미지</li>
-        <li>상품명</li>
-        <li>카테고리 분류</li>
-        <li>34,000</li>
-        <li>30,000</li>
-        <li>11%</li>
-        <li>100</li>
-        <li>Y</li>
-        <li>N</li>
+        <li><input type="checkbox" name="productCheck" value="<%=product.getCode()%>"></li>
+        <li><%=product.getCode()%></li>
+        <li>이미지 준비중</li>
+        <li><%=product.getName()%></li>
+        <li><%=product.getCategoryCode() %></li>
+        <li><%=product.getPrice() %></li>
+        <li><%=product.getDiscountPrice() %></li>
+        <li><%=product.getDiscount() %></li>
+        <li><%=product.getStock()%></li>
+        <li><%=product.getUsageSale()%></li>
+        <li><%=product.getEarlySoldout()%></li>
         <li>관리</li>
     </ul>
+    <%
+     	}
+     } else { %>
     <ul>
         <li style="width: 100%;">등록된 상품이 없습니다.</li>
     </ul>
+    <% } %>
 </div>
 <div class="subpage_view3">
     <ul class="pageing">
@@ -67,7 +77,7 @@
     </ul>
 </div>
 <div class="subpage_view4">
-    <input type="button" value="선택상품 삭제" title="선택상품 삭제" class="p_button">
+    <input type="button" value="선택상품 삭제" title="선택상품 삭제" class="p_button" onclick="productDeletor()">
     <span style="float: right;">
     <input type="button" value="신규상품 등록" title="신규상품 등록" class="p_button p_button_color1" onclick="newproduct()">
     <input type="button" value="카테고리 등록" title="카테고리 등록" class="p_button p_button_color2" onclick="category()">

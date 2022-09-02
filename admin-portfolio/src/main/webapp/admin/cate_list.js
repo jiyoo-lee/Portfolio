@@ -14,4 +14,12 @@ function search(){
 	else{
 		location.href="./category?search="+categoryCode+"&keyword="+keyword;
 	};
+}
+
+function list_product() {
+	location.href = "./product-list";
 }	
+
+function regist_category() {
+	location.href = "./admin_category_write.jsp";
+}

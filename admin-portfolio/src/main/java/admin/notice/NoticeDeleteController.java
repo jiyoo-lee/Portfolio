@@ -33,7 +33,7 @@ public class NoticeDeleteController extends HttpServlet{
 				throw new SQLException();
 			}
 		}catch (Exception e) {
-			pr.print("<script>alert('삭제 완료되었습니다.');</script>");
+			pr.print("<script>alert('데이터 통신 오류'); history.go(-1);</script>");
 		}
 	}
 }
