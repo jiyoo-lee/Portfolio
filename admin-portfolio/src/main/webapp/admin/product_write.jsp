@@ -118,6 +118,7 @@
         <li>상품 상세설명</li>
         <li>
             <textarea class="product_text1" id="productDetailDesc" name="productDetailDesc"></textarea>
+            <script type="text/javascript"> CKEDITOR.replace("productDetailDesc",{width: 700, height: 300 }); </script>
         </li>
     </ul>
 </div>

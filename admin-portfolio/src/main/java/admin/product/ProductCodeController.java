@@ -21,6 +21,11 @@ public class ProductCodeController extends HttpServlet {
 			if (recommandCode == null) {
 				recommandCode = categoryCode + "000001";
 			}
+			
+			while (recommandCode.length() < 12) {
+				recommandCode = "0" + recommandCode;
+			}
+			
 			response.getWriter().print(recommandCode);
 		}
 		catch (Exception e) {

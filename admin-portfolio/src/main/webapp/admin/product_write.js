@@ -1,3 +1,5 @@
+
+
 function selectCategory1(depthCode){
 	$('#select2').empty();
 	$('#select2').append('<option>---선택---</option>');
@@ -93,7 +95,7 @@ function registProduct() {
 	var discountPrice = $("#discount_price").val();
 	var stock = $("#stock");
 	var image1 = $("#image1").val();
-	var productDetailDesc = $("#productDetailDesc").val();
+	var productDetailDesc = CKEDITOR.instances.productDetailDesc.getData();
 	
 	if(overlapCheck == "N"){
 		alert("상품코드 중복체크를 해주세요.");
