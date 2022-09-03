@@ -1,4 +1,23 @@
 
+function allBox(allCategories)  {
+  const checkboxes 
+       = document.getElementsByName("categoryCheck");
+  
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = allCategories.checked;
+  })
+}
+
+function categoryDeletor(){
+	var checkboxes = document.getElementsByName("categoryCheck");
+
+	var deletCategoryCode = [];
+	checkboxes.forEach(checkbox => (checkbox.checked ? deletCategoryCode.push(checkbox.value) : checkbox));
+	
+	location.href = "./category/delete?datas="+deletCategoryCode;
+}
+
+
 function search(){
 	
 	var categoryCode = document.getElementById("select").value;

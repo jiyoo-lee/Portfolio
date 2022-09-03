@@ -21,7 +21,7 @@
 </div>
 <div class="subpage_view2">
     <ul>
-        <li><input type="checkbox"></li>
+        <li><input type="checkbox" name="categoryCheck" onclick="allBox(this)"></li>
         <li>분류코드</li>
         <li>대메뉴 코드</li>
         <li>대메뉴명</li>
@@ -35,7 +35,7 @@
      	for(CategoryDTO category : categories) {
     %>
     <ul>
-        <li><input type="checkbox"></li>
+        <li><input type="checkbox" name="categoryCheck" value="<%=category.getCode()%>" ></li>
         <li style="text-align: left; text-indent: 5px;"><%=category.getCode()%></li>
         <li><%=category.getDepthCode1()%></li>
         <li style="text-align: left; text-indent: 5px;"><%=category.getDepthName1()%></li>
@@ -62,7 +62,7 @@
     </ul>
 </div>
 <div class="subpage_view4">
-    <input type="button" value="카테고리 삭제" title="카테고리 삭제" class="p_button">
+    <input type="button" value="카테고리 삭제" title="카테고리 삭제" class="p_button" onclick="categoryDeletor()">
     <span style="float: right;">
     <input type="button" value="상품 리스트" title="상품 리스트" class="p_button p_button_color1" onclick="list_product()">
     <input type="button" value="카테고리 등록" title="카테고리 등록" class="p_button p_button_color2" onclick="regist_category()">

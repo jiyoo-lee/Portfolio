@@ -151,4 +151,14 @@
   </servlet-mapping>  
   
   
+  <servlet>
+	<servlet-name>CategoryDelete</servlet-name>
+	<servlet-class>admin.category.CategoryDeleteWebServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>CategoryDelete</servlet-name>
+	<url-pattern>/admin/category/delete</url-pattern>
+  </servlet-mapping> 
+  
 </web-app>

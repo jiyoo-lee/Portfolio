@@ -107,12 +107,23 @@ public class CategoryDAO {
 		return categories;
 	}
 	
-	public int delete(String code) throws SQLException {
-		String sql = "delete from category "
-				   + "where code = ?";
-		ps = connection.prepareStatement(sql);
-		ps.setString(1, code);
+	public int delete(String[] codes) throws SQLException {
 		
+		String questionMarks = "";
+		for(int i = 0; i <codes.length-1; i++) {
+			questionMarks += "?,";
+		}
+			questionMarks += " ?";
+		
+		String sql = "delete from category "
+				   + "where code in ("+questionMarks+")";
+		ps = connection.prepareStatement(sql);
+		int seq = 0;
+		while(seq < codes.length) {
+			
+			ps.setString(seq+1, codes[seq]);
+			seq++;
+		}
 		return ps.executeUpdate();
 	}
 	

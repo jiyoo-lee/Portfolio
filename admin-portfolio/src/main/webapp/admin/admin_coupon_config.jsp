@@ -18,7 +18,11 @@
     <link rel="icon" href="./img/logo.png" sizes="64x64">
     <link rel="icon" href="./img/logo.png" sizes="32x32">
     <link rel="icon" href="./img/logo.png" sizes="16x16">
+    <link rel="stylesheet" href= "./js/jquery-ui.css">
     <script src="./js/jquery.js"></script>
+    <script src="./js/jquery-ui.js"></script>
+    <script src="./coupon_insert.js"></script>
+    
 </head>
 <body>
 <header class="headercss">
