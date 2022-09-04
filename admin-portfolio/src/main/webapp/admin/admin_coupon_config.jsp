@@ -31,11 +31,13 @@
 <nav class="navcss">
 <%@include file="./admin_menu.html" %>
 </nav>
+<form name="frm" id="frm">
 <main class="maincss">
 <section style="height: auto;">
 <%@include file="./coupon_insert.jsp"%>  
 </section>
 </main>
+</form>
 <footer class="main_copyright">
 <%@include file="./admin_footer.html" %>
 </footer>
