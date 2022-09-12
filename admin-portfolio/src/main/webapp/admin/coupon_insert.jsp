@@ -16,8 +16,8 @@
         <li>쿠폰종류</li>
         <li><select id="couponType" name="couponType">
         		<option> --- 선 택 --- </option>
-        		<option value ="productDiscount">상품할인 </option>
-        		<option value= "shppingDiscount">배송비할인 </option>
+        		<option value ="1">상품할인 </option>
+        		<option value= "2">배송비할인 </option>
         </select> ※ 쿠폰종류를 입력해 주세요 (상품할인, 배송비할인)</li>
      </ol>
      <ol class="coupon_in">

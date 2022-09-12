@@ -1,21 +1,14 @@
 package admin.product;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +21,7 @@ import admin.category.CategoryDAO;
 public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private final static String FILE_PATH = "product_images\\";
+	private static final String FILE_PATH = "/jeeyulee/image/product/";
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -44,9 +37,8 @@ public class ProductController extends HttpServlet {
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");		
+		response.setContentType("text/html; charset=UTF-8");
 		
 		String productCode = "";
 		Enumeration<String> parameterNames = request.getParameterNames();
@@ -60,7 +52,7 @@ public class ProductController extends HttpServlet {
 				productCode = value;
 			}
 			if(key.equals("select2")) {
-				productDTO.setCategoryCode(value);				
+				productDTO.setCategoryCode(value);	
 			}
 			else if(key.equals("productCode")) {
 				productDTO.setCode(value);
@@ -100,17 +92,11 @@ public class ProductController extends HttpServlet {
 		for (Part image : images) {
 			if (image.getSize() != 0L && image.getName().startsWith("image")) {
 				String fileName = productCode + "_" + String.valueOf(fileIndex) +".jpg";
-				String realPath = request.getServletContext().getRealPath("");
-//				System.out.println(realPath);
-//				System.out.println(image.getName());
-//				System.out.println(image.getSize());
-//				System.out.println(FILE_PATH + fileName);
 				
-				File file = new File(FILE_PATH + fileName);
 				image.write(FILE_PATH + fileName);
 				
 				imageDTO.setProductCode(productCode);
-				imageDTO.setImagePath(realPath + fileName);
+				imageDTO.setImagePath(FILE_PATH + fileName);
 				imageDTO.setImageName(fileName);
 				
 				fileIndex++;

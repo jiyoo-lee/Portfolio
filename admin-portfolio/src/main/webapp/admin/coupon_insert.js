@@ -70,6 +70,5 @@ $(function (){
 		frm.submit();
 	}
 	
-		
 	})
 });
