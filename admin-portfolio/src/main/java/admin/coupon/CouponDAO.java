@@ -3,7 +3,10 @@ package admin.coupon;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CouponDAO {
@@ -40,6 +43,47 @@ public class CouponDAO {
 		this.ps.setString(8, couponDTO.getImagePath());
 		
 		return this.ps.executeUpdate();
+	}
+	
+	public List<CouponDTO> selectPaging(int startIndex, int pagingSize) throws SQLException {
+		List<CouponDTO> coupons = new ArrayList<>();
+		
+		String sql = "select * "
+				   + "from coupon "
+				   + "order by id desc "
+				   + "limit " + startIndex + ", " + pagingSize;
+		
+		this.ps = this.connection.prepareStatement(sql);
+		ResultSet rs = this.ps.executeQuery();
+		
+		while (rs.next()) {
+			CouponDTO coupon = new CouponDTO();
+			coupon.setId(rs.getLong("id"));
+			coupon.setName(rs.getString("name"));
+			coupon.setType(rs.getString("type"));
+			coupon.setUsageStart(rs.getString("usage_start"));
+			coupon.setUsageEnd(rs.getString("usage_end"));
+			coupon.setDiscountType(rs.getString("discount_type"));
+			coupon.setPriceOrRate(rs.getString("price_or_rate"));
+			coupon.setMinPrice(rs.getString("min_price"));
+			coupon.setImagePath(rs.getString("image_path"));
+			
+			coupons.add(coupon);
+		}
+		
+		return coupons;
+	}
+	
+	public int countAll() throws SQLException {
+		String sql = "select count(id) cnt "
+				   + "from coupon";
+		
+		this.ps = this.connection.prepareStatement(sql);
+		ResultSet rs = this.ps.executeQuery();
+		
+		rs.next();
+		
+		return rs.getInt("cnt");
 	}
 
 }

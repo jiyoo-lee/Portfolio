@@ -1,4 +1,4 @@
 
 function mkCoupon() {
-	location.href = "./coupon";
+	location.href = "./admin_coupon_config.jsp";
 }

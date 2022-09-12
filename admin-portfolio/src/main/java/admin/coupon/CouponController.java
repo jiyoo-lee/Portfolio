@@ -1,8 +1,9 @@
 package admin.coupon;
 
-import java.awt.geom.IllegalPathStateException;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,13 +20,35 @@ import org.eclipse.jdt.core.compiler.InvalidInputException;
 public class CouponController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private static final int PAGE_SIZE = 5;
+	
     public CouponController() {
        
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		RequestDispatcher rd = request.getRequestDispatcher("./admin_coupon_config.jsp");
+	
+		String pageNumber = request.getParameter("pageNumber");
+		if (pageNumber == null) {
+			pageNumber = "1";
+		}
+		
+		try {
+			CouponDAO couponDAO = new CouponDAO();
+
+			int startIndex = (Integer.parseInt(pageNumber) - 1) * PAGE_SIZE;
+			List<CouponDTO> coupons = couponDAO.selectPaging(startIndex, PAGE_SIZE);
+			
+			int couponCount = couponDAO.countAll();
+			int pageCount = (couponCount + PAGE_SIZE - 1) / PAGE_SIZE;
+			
+			request.setAttribute("coupons", coupons);
+			request.setAttribute("pageCount", pageCount);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("./admin_shopping.jsp");
 		rd.forward(request, response);
 	}
 
@@ -66,7 +89,7 @@ public class CouponController extends HttpServlet {
 			int insertCnt = couponDAO.insertCouponInfo(couponDTO);
 			
 			if(insertCnt > 0) {
-				response.getWriter().print("<script>alert('쿠폰 등록이 완료되었습니다.');</script>");
+				response.getWriter().print("<script>alert('쿠폰 등록이 완료되었습니다.'); location.href='./coupon';</script>");
 			}
 			else {
 				throw new InvalidInputException();
