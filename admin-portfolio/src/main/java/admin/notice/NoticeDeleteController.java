@@ -1,9 +1,10 @@
 package admin.notice;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Enumeration;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,6 +35,31 @@ public class NoticeDeleteController extends HttpServlet{
 			}
 		}catch (Exception e) {
 			pr.print("<script>alert('데이터 통신 오류'); history.go(-1);</script>");
+		}
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setContentType("application/json; charset=utf-8");
+		PrintWriter pr = resp.getWriter();
+		
+		String[] index = req.getParameterValues("datas");
+	
+		if(index != null  && index.length > 0) {
+			try {
+				AdminDAO adminDAO = new AdminDAO();
+				int id = adminDAO.deleteNotices(index);
+				
+				if(id > 0) {
+					pr.print("1");
+				}
+				else {
+					throw new SQLException();
+				}
+			}catch (Exception e) {
+				pr.print("2");
+			}
 		}
 	}
 }

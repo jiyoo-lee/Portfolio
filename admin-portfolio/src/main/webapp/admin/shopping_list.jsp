@@ -36,8 +36,8 @@
             	<li><%=coupon.getId()%></li>
             	<li><%=coupon.getName()%></li>
             	<li><%=coupon.getType()%></li>
-            	<li><%=coupon.getUsageStart()%></li>
-            	<li><%=coupon.getUsageEnd()%></li>
+            	<li><%=coupon.getUsageStart().substring(0,19)%></li>
+            	<li><%=coupon.getUsageEnd().substring(0,19)%></li>
             	<li><%=coupon.getDiscountType()%></li>
             	<li><%=coupon.getPriceOrRate()%></li>
             	<li><%=coupon.getMinPrice()%></li>
