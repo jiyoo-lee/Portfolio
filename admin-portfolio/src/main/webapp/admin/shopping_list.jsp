@@ -35,12 +35,24 @@
          	<ol class="coupon_lists">
             	<li><%=coupon.getId()%></li>
             	<li><%=coupon.getName()%></li>
-            	<li><%=coupon.getType()%></li>
+            	<%	String type = "상품할인";
+            		if(coupon.getType().equals("2")){
+            			type = "배송비 할인";
+            		}%>
+            	<li><%=type%></li>
             	<li><%=coupon.getUsageStart().substring(0,19)%></li>
             	<li><%=coupon.getUsageEnd().substring(0,19)%></li>
-            	<li><%=coupon.getDiscountType()%></li>
-            	<li><%=coupon.getPriceOrRate()%></li>
-            	<li><%=coupon.getMinPrice()%></li>
+            	<%	String discount = "정액할인";
+            		if(coupon.getDiscountType().equals("2")) {
+            			discount= "정률할인";
+            	}%>
+            	<li><%=discount%></li>
+            	<%	String unit = "원";
+            		if(discount.equals("정률할인")){
+            		unit = "%";
+            	} %>
+            	<li><%=coupon.getPriceOrRate() + unit%></li>
+            	<li><%=coupon.getMinPrice()+ "원"%></li>
          	</ol>
          <%
          	}
