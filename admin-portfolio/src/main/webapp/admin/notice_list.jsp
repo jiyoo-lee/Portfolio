@@ -22,7 +22,7 @@
 <ol>
     <li><input type="checkbox" name="deleteCheck" value="<%=notice.getId()%>"></li>
     <li><%=notice.getRow()%></li>
-    <li><%=notice.getTitle()%></li>
+    <li><a href="./noticeview?page=<%=notice.getId()%>"style="color: black"><%=notice.getTitle()%></a></li>
     <li><%=notice.getWriter() %></li>
     <li><%=notice.getCreateDatetime().substring(0,10)%></li>
     <li><%=notice.getViews() %></li>

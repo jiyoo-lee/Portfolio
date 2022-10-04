@@ -10,7 +10,7 @@
     <title>관리자 페이지</title>
     <script src="./js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/basic.css">
-    <link rel="stylesheet" type="text/css" href="./css/login.css?v=1">
+    <link rel="stylesheet" type="text/css" href="./css/mainlogin.css?v=1">
     <link rel="icon" href="./img/logo.png" sizes="128x128">
     <link rel="icon" href="./img/logo.png" sizes="64x64">
     <link rel="icon" href="./img/logo.png" sizes="32x32">
@@ -35,10 +35,9 @@
 				frm.submit();
 			}
 		})
-		
 	});
 </script>
-<body>
+<body style="height: 100vh;">
  <form name="frm" id="frm">
     <header class="admin_title">
         <p><img src="./img/logo.png" class="logo_sm"> ADMINISTRATOR</p>

@@ -19,7 +19,7 @@ function noticeDeletor(){
 	
 	var deleteNoticeId = [];
 	checkboxes.forEach(checkbox => (checkbox.checked ? deleteNoticeId.push(checkbox.value) : checkbox));
-	console.log(deleteNoticeId);
+	
 	$.ajax({
 		url: "./notice-control",
 		type: "post",

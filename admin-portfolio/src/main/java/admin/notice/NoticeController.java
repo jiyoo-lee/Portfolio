@@ -43,8 +43,8 @@ public class NoticeController extends HttpServlet {
 		noticeRegistration.add(req.getParameter("noticeTitle"));
 		noticeRegistration.add(req.getParameter("writer"));
 		noticeRegistration.add(req.getParameter("topExposure"));
-		noticeRegistration.add(req.getParameter("attachments"));
 		noticeRegistration.add(req.getParameter("content"));
+		noticeRegistration.add(req.getParameter("attachments"));
 				
 		try {
 			AdminDAO adminDAO = new AdminDAO();

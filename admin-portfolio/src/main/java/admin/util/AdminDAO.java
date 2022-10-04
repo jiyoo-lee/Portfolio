@@ -316,5 +316,42 @@ public class AdminDAO {
 		
 		return this.ps.executeUpdate();
 	}
+	
+	public List<NoticeDTO> selectNoticeDetail(String id) throws SQLException{
+		List<NoticeDTO> notice = new ArrayList<>();
+		
+		String sql = "select * from notice where id = "+ id;
+		this.ps = connection.prepareStatement(sql);
+		ResultSet rs = this.ps.executeQuery();
+		
+		rs.last();
+		int rowNum = rs.getRow();
+		rs.beforeFirst();
+		
+		while(rs.next()) {
+			NoticeDTO noticeDTO = new NoticeDTO();
+			
+			noticeDTO.setId(rs.getLong("id"));
+			noticeDTO.setTitle(rs.getString("title"));
+			noticeDTO.setWriter(rs.getString("writer"));
+			noticeDTO.setTopExposure(rs.getString("top_exposure"));
+			noticeDTO.setContent(rs.getString("content"));
+			noticeDTO.setAttachments(rs.getString("attachments"));
+			noticeDTO.setCreateDatetime(rs.getString("create_datetime"));
+			noticeDTO.setRow(rowNum--);
+			notice.add(noticeDTO);
+		}
+		return notice;
+	}
+	
+	public List<AdminDTO> selectAdminInfo(){
+		
+		List<AdminDTO> admins = new ArrayList<AdminDTO>();
+		
+		String sql = "select * from admin_list where ";
+		
+		
+		return admins;
+	}
 }
 

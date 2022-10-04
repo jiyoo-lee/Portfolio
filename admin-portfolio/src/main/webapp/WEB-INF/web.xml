@@ -161,4 +161,24 @@
 	<url-pattern>/admin/category/delete</url-pattern>
   </servlet-mapping> 
   
+  <servlet>
+	<servlet-name>NoticeView</servlet-name>
+	<servlet-class>admin.notice.NoticeViewWebServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name>NoticeView</servlet-name>
+	<url-pattern>/admin/noticeview</url-pattern>
+  </servlet-mapping> 
+  
+    <servlet>
+	<servlet-name> AdminUpdate</servlet-name>
+	<servlet-class>admin.util.AdminUpdateWebServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+	<servlet-name> AdminUpdate</servlet-name>
+	<url-pattern>/admin/admin-info</url-pattern>
+  </servlet-mapping> 
+  
 </web-app>
