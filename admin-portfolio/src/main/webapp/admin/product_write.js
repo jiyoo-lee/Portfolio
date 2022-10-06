@@ -55,14 +55,14 @@ function checkOverlap() {
 		data: {productCode: productCode},
 		datatype: "text",
 		success : function(data){
-			if (data == true) {
-				alert("상품코드가 중복됩니다.");
-			}
-			else{
-				alert("사용가능한 코드입니다.");
-				$('#overlapCheck').val("Y");
-			}
-		},
+					if(data == "true") {
+					alert("상품코드가 중복됩니다.");
+				}
+				else{
+					alert("사용가능한 코드입니다.");
+					$('#overlapCheck').val("Y");
+				}
+			},
 		error : function(xhr){
 			console.log(xhr.responseText);
 			return;

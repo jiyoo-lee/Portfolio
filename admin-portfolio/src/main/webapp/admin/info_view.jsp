@@ -15,14 +15,14 @@
             <input type="text" class="add_input1" readOnly>
         </li>
         <li>
-        <input type="text" class="add_input1 emails">
+        <input type="text" class="add_input1 emails" id ="email">
         </li>
         <li class="font_color1">
-        <input type="text" class="add_input1 hp1" maxlength="3">
+        <input type="text" class="add_input1 hp1" maxlength="3" id ="email" >
         -
-        <input type="text" class="add_input1 hp2" maxlength="4">
+        <input type="text" class="add_input1 hp2" maxlength="4" id ="email">
         -
-        <input type="text" class="add_input1 hp2" maxlength="4">
+        <input type="text" class="add_input1 hp2" maxlength="4" id ="email">
         </li>
         <li class="font_color1">관리자 담당부서 및 직책</li>
         <li>

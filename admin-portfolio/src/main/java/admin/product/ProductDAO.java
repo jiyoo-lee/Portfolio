@@ -48,6 +48,7 @@ public class ProductDAO {
 				   + "where category_code = ?";
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, categoryCode);
+		
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			return rs.getString("productCode");

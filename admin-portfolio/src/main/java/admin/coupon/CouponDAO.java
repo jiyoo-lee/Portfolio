@@ -82,7 +82,6 @@ public class CouponDAO {
 		ResultSet rs = this.ps.executeQuery();
 		
 		rs.next();
-		
 		return rs.getInt("cnt");
 	}
 

@@ -25,7 +25,7 @@ public class ProductCodeController extends HttpServlet {
 			while (recommandCode.length() < 12) {
 				recommandCode = "0" + recommandCode;
 			}
-			
+						
 			response.getWriter().print(recommandCode);
 		}
 		catch (Exception e) {
