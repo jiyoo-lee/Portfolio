@@ -57,6 +57,7 @@ function checkOverlap() {
 		success : function(data){
 					if(data == "true") {
 					alert("상품코드가 중복됩니다.");
+					$('#overlapCheck').val("N");
 				}
 				else{
 					alert("사용가능한 코드입니다.");
