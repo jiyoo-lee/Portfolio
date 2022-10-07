@@ -4,11 +4,15 @@ $(function(){
 	})
 	
 	$("#go_notice_modify").click(function() {
-		alert("수정 필요");
+		var id = $("#page").val();
+		
+		frm.method ="post";
+		frm.actionc = "./noticeview";
+		frm.submit();
 	})
 	
 	$("#go_notice_delete").click(function() {
-		var idx = $("#page").val()
+		var idx = $("#page").val();
 		
 		$.ajax({
 		url: "./notice-control",

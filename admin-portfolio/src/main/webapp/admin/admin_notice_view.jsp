@@ -25,11 +25,13 @@
 <nav class="navcss">
 <%@include file="./admin_menu.html" %>
 </nav>
+<form id="frm" name="frm">
 <main class="maincss">
 <section style="height: auto;">
 <%@include file="./notice_view.jsp" %>
 </section>
 </main>
+</form>
 <footer class="main_copyright">
 <%@include file="./admin_footer.html" %>
 </footer>

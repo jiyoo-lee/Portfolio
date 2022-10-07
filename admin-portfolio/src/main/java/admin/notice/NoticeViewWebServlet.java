@@ -35,7 +35,13 @@ public class NoticeViewWebServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		try {
+			String idx = request.getParameter("page");
+			AdminDAO adminDAO = new AdminDAO();
+			
+		}catch (Exception e) {
+		
+		}
 	}
-
 }
